@@ -45,11 +45,14 @@
   <ItemGroup>
     <Compile Include="GameBoard\Board.cs" />
     <Compile Include="GameBoard\Cell.cs" />
+    <Compile Include="Screens\GameOptions.cs" />
+    <Compile Include="Screens\GameOverScreen.cs" />
     <Compile Include="Screens\GameScreen.cs" />
     <Compile Include="Screens\HelpScreen.cs" />
     <Compile Include="Screens\HighscoreScreen.cs" />
     <Compile Include="Screens\UI\Arrow.cs" />
     <Compile Include="Screens\UI\SplashText.cs" />
+    <Compile Include="Utils\CrashReporter.cs" />
     <Compile Include="Utils\Keyboard.cs" />
     <Compile Include="Screens\UI\MenuText.cs" />
     <Compile Include="Program.cs" />
@@ -63,6 +66,7 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="Assets\Notes.txt" />
+    <Content Include="Assets\SplashTexts.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

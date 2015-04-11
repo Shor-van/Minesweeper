@@ -3,31 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Mastermind.Screens
+namespace Minesweaper.Screens.UI
 {
     //Handles the selection arrow
     public class Arrow
     {
-        ConsoleColor color;
-        int posX;
-        int posY;
-        bool invert;
+        ConsoleColor color; //The color of the arrow
+        int posX, posY; //The location on the screen
+        bool invert; //Weather the arrow is inverted
 
-        public ConsoleColor Color
-        {
-            get { return color; }
-            set { color = value; }
-        }
-        public int PosX
-        {
-            get { return posX; }
-            set { posX = value; }
-        }
-        public int PosY
-        {
-            get { return posY; }
-            set { posY = value; }
-        }
+        //Gets and sets
+        public ConsoleColor Color { get { return color; } set { color = value; } }
+        public int PositionX { get { return posX; } set { posX = value; } }
+        public int PositionY { get { return posY; } set { posY = value; } }
 
         public Arrow(ConsoleColor pColor, int pPosX, int pPosY,bool pInvert)
         {
@@ -49,14 +37,12 @@ namespace Mastermind.Screens
             Console.ForegroundColor = color;
             Console.BackgroundColor = Program.backgroundColor;
             Console.SetCursorPosition(posY,posX);
+            
             if (invert)
-            {
-                Console.Write("<-");
-            }
-            else
-            {
+                Console.Write("<-");           
+            else           
                 Console.Write("->");
-            }
+
             Console.ResetColor();
         }
     }

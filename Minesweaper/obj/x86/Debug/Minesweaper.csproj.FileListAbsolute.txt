@@ -1,0 +1,5 @@
+C:\Users\Espedito\Documents\Visual Studio 2010\Projects\Games\Console(Texted Based)\Minesweaper\Minesweaper\bin\Debug\Minesweaper.exe
+C:\Users\Espedito\Documents\Visual Studio 2010\Projects\Games\Console(Texted Based)\Minesweaper\Minesweaper\bin\Debug\Minesweaper.pdb
+C:\Users\Espedito\Documents\Visual Studio 2010\Projects\Games\Console(Texted Based)\Minesweaper\Minesweaper\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Espedito\Documents\Visual Studio 2010\Projects\Games\Console(Texted Based)\Minesweaper\Minesweaper\obj\x86\Debug\Minesweaper.exe
+C:\Users\Espedito\Documents\Visual Studio 2010\Projects\Games\Console(Texted Based)\Minesweaper\Minesweaper\obj\x86\Debug\Minesweaper.pdb

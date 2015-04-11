@@ -6,96 +6,29 @@ using System.Text;
 namespace Minesweaper.Utils
 {
     //Will handle all the input logic
-    public class Keyboard
+    public static class Keyboard
     {
-        ConsoleKeyInfo keyPress;
+        private static ConsoleKeyInfo currentKeyInfo; //The current key info
+        private static ConsoleKeyInfo lastKeyInfo; //The last loops key info
 
-        public bool Up
+        /// <summary>Checks if the spesified key is pressed</summary>
+        /// <param name="key">The key to check if it is pressed</param>
+        /// <returns>True if the key is pressed</returns>
+        public static bool IsKeyPressed(ConsoleKey key)
         {
-            get { return IsKeyPressed(ConsoleKey.UpArrow); }
-        }
-        public bool Down
-        {
-            get { return IsKeyPressed(ConsoleKey.DownArrow); }
-        }
-        public bool Left
-        {
-            get { return IsKeyPressed(ConsoleKey.LeftArrow); }
-        }
-        public bool Right
-        {
-            get { return IsKeyPressed(ConsoleKey.RightArrow); }
+            return currentKeyInfo.Key == key;
         }
 
-        public bool W
+        /// <summary>Updates the keyboard handler, Gets the current state of the keys</summary>
+        public static void Update()
         {
-            get { return IsKeyPressed(ConsoleKey.W); }
-        }
-        public bool S
-        {
-            get { return IsKeyPressed(ConsoleKey.S); }
-        }
-        public bool A
-        {
-            get { return IsKeyPressed(ConsoleKey.A); }
-        }
-        public bool D
-        {
-            get { return IsKeyPressed(ConsoleKey.D); }
+            lastKeyInfo = currentKeyInfo;
+            currentKeyInfo= Console.ReadKey(true);
         }
 
-        public bool Enter
+        public static void Clear()
         {
-            get { return IsKeyPressed(ConsoleKey.Enter); }
-        }
-        public bool Escape
-        {
-            get { return IsKeyPressed(ConsoleKey.Escape); }
-        }
-
-        public bool Red
-        {
-            get { return IsKeyPressed(ConsoleKey.R); }
-        }
-        public bool Lime
-        {
-            get { return IsKeyPressed(ConsoleKey.L); }
-        }
-        public bool Yellow
-        {
-            get { return IsKeyPressed(ConsoleKey.Y); }
-        }
-        public bool Blue
-        {
-            get { return IsKeyPressed(ConsoleKey.B); }
-        }
-
-        public bool Cyan
-        {
-            get { return IsKeyPressed(ConsoleKey.C); }
-        }
-        public bool White
-        {
-            get { return IsKeyPressed(ConsoleKey.W); }
-        }
-
-        public bool Magenta
-        {
-            get { return IsKeyPressed(ConsoleKey.M); }
-        }
-        public bool Gray
-        {
-            get { return IsKeyPressed(ConsoleKey.G); }
-        }
-
-        public bool IsKeyPressed(ConsoleKey key)
-        {
-            return keyPress.Key == key;
-        }
-
-        public void Update()
-        {
-            keyPress = Console.ReadKey(true);
+            currentKeyInfo = new ConsoleKeyInfo();
         }
     }
 }
