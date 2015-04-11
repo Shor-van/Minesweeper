@@ -49,9 +49,11 @@ namespace Minesweaper
                     }
                     else if (gameState == GameState.GameOverState)
                     {
+                        
                     }
                     else if (gameState == GameState.ScoreState)
                     {
+                        
                     }
 
                     //Check if game swichingScreen

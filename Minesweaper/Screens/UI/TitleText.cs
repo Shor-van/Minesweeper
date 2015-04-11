@@ -3,37 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Minesweaper
+namespace Minesweaper.Screens.UI
 {
     //Will handle all the drawing and update of the Title Texts
     public class TitleText
     {
-        string text;
-        ConsoleColor color;
-        int posX;
-        int posY;
+        string text; //The text to display
+        ConsoleColor color; //The color at witch to draw the text
+        int posX, posY; //The top left location at witch to draw the text
 
-        public string Text
-        {
-            get { return text; }
-            set { text = value; }
-        }
-        public ConsoleColor Color
-        {
-            get { return color; }
-            set { color = value; }
-        }
-        public int PosX
-        {
-            get { return posX; }
-            set { posX = value; }
-        }
-        public int PosY
-        {
-            get { return posY; }
-            set { posY = value; }
-        }
-
+        //Gets and set
+        public string Text { get { return text; } set { text = value; } }
+        public ConsoleColor Color { get { return color; } set { color = value; } }
+        public int PositionX { get { return posX; }set { posX = value; } }
+        public int PositionY { get { return posY; } set { posY = value; } }
+        
+        /// <summary>Base construcor</summary>
+        /// <param name="pText">The text to draw</param>
+        /// <param name="pColor">The color atith to draw the text</param>
+        /// <param name="pPosX">The left mst location oe screen at witch to draw</param>
+        /// <param name="pPosY">The top most location on the screen at witch to draw</param>
         public TitleText(string pText, ConsoleColor pColor, int pPosX, int pPosY)
         {
             text = pText;
@@ -42,11 +31,10 @@ namespace Minesweaper
             posY = pPosY;
         }
 
-        public void Update()
-        {
-            //Not used here as updateing is not needed
-        }
+        /// <summary>Updates the text, Does noting</summary>
+        public void Update() { }
 
+        /// <summary>Draws the text on the screen</summary>
         public void Draw()
         {
             char[] letter = new char[text.Length];
