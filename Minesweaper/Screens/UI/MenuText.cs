@@ -48,6 +48,13 @@ namespace Minesweaper.Screens.UI
             sColor = ConsoleColor.Yellow;
         }
 
+        /// <summary>Measures the size of the string, Note that its not in pixels but in tiles</summary>
+        /// <returns>A array that contains how much tile space the string takes in the window (0) width (1)height</returns>
+        public int[] MeasureSize()
+        {
+            return new int[] { text.Length,1 };
+        }
+
         //Event handlers
         /// <summary>Triggered when the player hits enter while this is active</summary>
         /// <param name="e">Event args</param>
@@ -105,7 +112,7 @@ namespace Minesweaper.Screens.UI
         {
             Console.ForegroundColor = aColor;
             Console.BackgroundColor = Program.backgroundColor;
-            Console.SetCursorPosition(posY, posX);
+            Console.SetCursorPosition(posX, posY);
             Console.Write(text);
             Console.ResetColor();
         }

@@ -31,6 +31,143 @@ namespace Minesweaper.Screens.UI
             posY = pPosY;
         }
 
+        public int[] MeasureSize()
+        {
+            int[] size = new int[2];
+            char[] letter = new char[text.Length];
+            letter = text.ToCharArray(0, text.Length);
+            for (int i = 0; i < text.Length; i++)
+            {
+                switch (letter[i])
+                {
+                    //UpperCase
+                    case 'A':
+                        size[0] = size[0] + 6;
+                        break;
+                    case 'B':
+                        size[0] = size[0] + 6;
+                        break;
+                    case 'C':
+                        size[0] = size[0] + 6;
+                        break;
+                    case 'D':
+                        size[0] = size[0] + 6;
+                        break;
+                    case 'E':
+                        size[0] = size[0] + 5;
+                        break;
+                    case 'F':
+                        size[0] = size[0] + 5;
+                        break;
+                    case 'G':
+                        size[0] = size[0] + 6;
+                        break;
+                    case 'H':
+                        size[0] = size[0] + 6;
+                        break;
+                    case 'I':
+                        size[0] = size[0] + 4;
+                        break;
+                    case 'J':
+                        size[0] = size[0] + 6;
+                        break;
+                    case 'K':
+                        size[0] = size[0] + 5;
+                        break;
+                    case 'L':
+                        size[0] = size[0] + 5;
+                        break;
+                    case 'M':
+                        size[0] = size[0] + 6;
+                        break;
+                    case 'N':
+                        size[0] = size[0] + 6;
+                        break;
+                    case 'O':
+                        size[0] = size[0] + 6;
+                        break;
+                    case 'P':
+                        size[0] = size[0] + 6;
+                        break;
+                    case 'Q':
+                        size[0] = size[0] + 6;
+                        break;
+                    case 'R':
+                        size[0] = size[0] + 6;
+                        break;
+                    case 'S':
+                        size[0] = size[0] + 6;
+                        break;
+                    case 'T':
+                        size[0] = size[0] + 4;
+                        break;
+                    case 'U':
+                        size[0] = size[0] + 6;
+                        break;
+                    case 'V':
+                        size[0] = size[0] + 6;
+                        break;
+                    case 'W':
+                        size[0] = size[0] + 6;
+                        break;
+                    case 'X':
+                        size[0] = size[0] + 6;
+                        break;
+                    case 'Y':
+                        size[0] = size[0] + 6;
+                        break;
+                    case 'Z':
+                        size[0] = size[0]+ 4;
+                        break;
+                    //Numbers
+                    case '0':
+                        size[0] = size[0] + 6;
+                        break;
+                    case '1':
+                        size[0] = size[0] + 4;
+                        break;
+                    case '2':
+                        size[0] = size[0] + 5;
+                        break;
+                    case '3':
+                        size[0] = size[0] + 5;
+                        break;
+                    case '4':
+                        size[0] = size[0] + 5;
+                        break;
+                    case '5':
+                        size[0] = size[0] + 5;
+                        break;
+                    case '6':
+                        size[0] = size[0] + 5;
+                        break;
+                    case '7':
+                        size[0] = size[0] + 5;
+                        break;
+                    case '8':
+                        size[0] = size[0] + 6;
+                        break;
+                    case '9':
+                        size[0] = size[0] + 5;
+                        break;
+                    //Special Chars
+                    case ' ':
+                        size[0] = size[0] + 3;
+                        break;
+                    case '\'':
+                        size[0] = size[0] + 4;
+                        break;
+                    case ':':
+                        size[0] = size[0] + 3;
+                        break;
+                }
+                if(i == text.Length - 1)
+                    size[0] = size[0] - 1;
+            }
+            size[1] = 5;
+            return size;
+        }
+
         /// <summary>Updates the text, Does noting</summary>
         public void Update() { }
 
@@ -41,8 +178,8 @@ namespace Minesweaper.Screens.UI
             letter = text.ToCharArray(0, text.Length);
             Console.ForegroundColor = color;
             Console.BackgroundColor = Program.backgroundColor;
-            int left = posY;
-            int top = posX;
+            int left = posX;
+            int top = posY;
             for (int i = 0; i < text.Length; i++)
             {
                 try

@@ -14,15 +14,27 @@ namespace Minesweaper.Screens
         private int selection; //The currectly selected option in the list 
         private TitleText tile; //The tile of the menu
 
+        //Labels
+        private TextLabel version; //The version of the game
+        private TextLabel controls; //Shows how to use the menu
+        private TextLabel shorvan; //ME
+
         /// <summary>Initsalize the menu</summary>
         public MenuScreen()
         {
-            tile = new TitleText("MINESWEEPER",ConsoleColor.Red,0,0);
+            //Tile
+            tile = new TitleText("MINESWEEPER",ConsoleColor.Red,19,2);
 
+            //Options
             options = new List<MenuText>();
-            options.Add(new MenuText("Play Game", 7, 10));
-            options.Add(new MenuText("How To Play", 8, 10));
-            options.Add(new MenuText("Quit Game", 9, 10));
+            options.Add(new MenuText("Play Game", 10,7));
+            options.Add(new MenuText("How To Play", 10, 8));
+            options.Add(new MenuText("Quit Game", 10, 9));
+
+            //Labels
+            version = new TextLabel(Console.Title,0,0,ConsoleColor.Cyan);
+            controls = new TextLabel("W: move up, S: move down, Enter: select", 0, 0, ConsoleColor.Gray);
+            shorvan = new TextLabel("By Shor_van", 0, 0, ConsoleColor.Cyan);
 
             //Register event handlers
             options[0].Selected += new MenuText.BaseEventHandler(OnPlayGameSelected);
@@ -37,12 +49,14 @@ namespace Minesweaper.Screens
         //event handlers
         private void OnPlayGameSelected(object sender, EventArgs e)
         {
-
+            Program.gameState = GameState.GameOptionState;
+            return;
         }
 
         private void OnHelpSelected(object sender, EventArgs e)
         {
-
+            Program.gameState = GameState.HelpState;
+            return;
         }
 
         private void OnQuitSelected(object sender, EventArgs e)
@@ -54,6 +68,32 @@ namespace Minesweaper.Screens
         public void Update()
         {
             Program.switchingScreen = false;
+
+            if (Program.sizeChanged)
+            {
+                //Recalulate positions
+                options[0].PositionX = (Program.ViewWidth() / 2) - (options[0].MeasureSize()[0] / 2);
+                options[1].PositionX = (Program.ViewWidth() / 2) - (options[1].MeasureSize()[0] / 2);
+                options[2].PositionX = (Program.ViewWidth() / 2) - (options[2].MeasureSize()[0] / 2);
+
+                options[0].PositionY = (Program.ViewHieght() / 2) -  3;
+                options[1].PositionY = (Program.ViewHieght() / 2) - 2;
+                options[2].PositionY = (Program.ViewHieght() / 2) - 1;
+
+                //Tile
+                tile.PositionX = (Program.ViewWidth() / 2 - (tile.MeasureSize())[0] / 2);
+                tile.PositionY = 2;
+
+                //Labels
+                version.PositionX = 1;
+                version.PositionY = Program.ViewHieght() - 1;
+
+                controls.PositionX = (Program.ViewWidth() / 2) - (controls.MeasureSize()[0] / 2);
+                controls.PositionY = Program.ViewHieght() - 1;
+
+                shorvan.PositionX = ((Program.ViewWidth()-1) - shorvan.MeasureSize()[0]);
+                shorvan.PositionY = Program.ViewHieght() - 1;
+            }
 
             //Update selection
             if (Keyboard.IsKeyPressed(ConsoleKey.W))
@@ -83,17 +123,24 @@ namespace Minesweaper.Screens
             }
 
             //Update arrow
-            selectionArrow.Update(options[selection].PositionX, options[selection].PositionY - 2);
+            selectionArrow.Update(options[selection].PositionX-3, options[selection].PositionY);
         }
 
         /// <summary>Draws the menu, option list, title</summary>
         public void Draw()
         {
+            //Tile
             tile.Draw();
-            selectionArrow.Draw();
 
+            //Menu
+            selectionArrow.Draw();
             foreach (MenuText option in options)
                 option.Draw();
+
+            //Labels
+            version.Draw();
+            controls.Draw();
+            shorvan.Draw();
         }
 	}
 }

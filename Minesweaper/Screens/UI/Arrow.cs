@@ -27,7 +27,7 @@ namespace Minesweaper.Screens.UI
 
         public void Update(int newPosX,int newPosY)
         {
-            Console.MoveBufferArea(posY, posX, 2, 1, newPosY, newPosX);
+            Console.MoveBufferArea(posX, posY, 2, 1, newPosX, newPosY);
             posX = newPosX;
             posY = newPosY;
         }
@@ -36,7 +36,7 @@ namespace Minesweaper.Screens.UI
         {
             Console.ForegroundColor = color;
             Console.BackgroundColor = Program.backgroundColor;
-            Console.SetCursorPosition(posY,posX);
+            Console.SetCursorPosition(posX,posY);
             
             if (invert)
                 Console.Write("<-");           

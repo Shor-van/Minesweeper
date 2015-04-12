@@ -14,29 +14,43 @@ namespace Minesweaper
         GameOptionState,
         GamePlayState,
         GameOverState,
-        ScoreState
+        ScoreState,
+        HelpState
     }
 
     class Program
     {
-        public static bool isExiting = false;
-        public static bool switchingScreen = false;
-        public static ConsoleColor backgroundColor = ConsoleColor.Black;
-        public static GameState gameState = GameState.MenuState; 
+        public static bool isExiting = false; //Weather the game is exiting
+        public static bool switchingScreen = false; //Weather the screen is changing
+        public static ConsoleColor backgroundColor = ConsoleColor.Black; //The current background color
+        public static GameState gameState = GameState.MenuState; //The "state" of the game, used to see witch screen to draw
+        public static bool sizeChanged = true; //Weather the window size has changed 
 
         //Screens
         private static MenuScreen menuScreen;
 
+        private static int viewWidth = 100, viewHeight = 34;
+
         private static void Initalize()
         {
-            Console.SetWindowSize(100, 34);
-            Console.Title = "Minesweeper V0.01";
+            Console.SetWindowSize(viewWidth, viewHeight);
+            Console.Title = "Minesweeper V0.02";
             Console.CursorVisible = false;
-            Console.BufferWidth = 100;
-            Console.BufferHeight = 34;
+            Console.BufferWidth = viewWidth;
+            Console.BufferHeight = viewHeight;
 
             menuScreen = new MenuScreen();
         }
+
+        public static void ChangeWindowSize(int width, int height)
+        {
+            viewWidth = width;
+            viewHeight = height;
+            sizeChanged = true;
+        }
+
+        public static int ViewWidth() { return viewWidth; }
+        public static int ViewHieght() { return viewHeight; }
 
         static void Main(string[] args)
         {
@@ -109,7 +123,9 @@ namespace Minesweaper
                     {
                         Console.Clear();
                     }
+                    System.Threading.Thread.Sleep(16);
                     Keyboard.Clear();
+                    sizeChanged = false;
                 }
                 else
                 {

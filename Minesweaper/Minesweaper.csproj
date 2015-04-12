@@ -52,6 +52,7 @@
     <Compile Include="Screens\HighscoreScreen.cs" />
     <Compile Include="Screens\UI\Arrow.cs" />
     <Compile Include="Screens\UI\SplashText.cs" />
+    <Compile Include="Screens\UI\TextLabel.cs" />
     <Compile Include="Utils\CrashReporter.cs" />
     <Compile Include="Utils\Keyboard.cs" />
     <Compile Include="Screens\UI\MenuText.cs" />
