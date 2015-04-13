@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Minesweeper.GameBoard
+namespace Minesweeper.Sound
 {
-    public class Cell
+    public class SoundManager
     {
     }
 }

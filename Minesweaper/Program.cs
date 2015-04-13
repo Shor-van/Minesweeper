@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using Minesweeper.Utils;
 using Minesweeper.Screens;
+using System.Threading;
+using System.Diagnostics;
 
 namespace Minesweeper
 {
@@ -26,6 +28,11 @@ namespace Minesweeper
         public static GameState gameState = GameState.MenuState; //The "state" of the game, used to see witch screen to draw
         public static bool sizeChanged = true; //Weather the window size has changed 
         public static Random rand = new Random(); //Random 
+        public static Thread sound; //Sound Thread
+        public static float lastLoopTime; //The time that the last game loop took to complete
+        
+        //GameTime
+        public static Stopwatch gameTime;
 
         //Screens
         private static MenuScreen menuScreen;
@@ -39,6 +46,7 @@ namespace Minesweeper
             Console.CursorVisible = false;
             Console.BufferWidth = viewWidth;
             Console.BufferHeight = viewHeight;
+            gameTime = new Stopwatch();
 
             menuScreen = new MenuScreen();
         }
@@ -69,7 +77,9 @@ namespace Minesweeper
                 //in the form of check input then update objects then draw screen
                 while (true)
                 {
+                    gameTime.Restart();
                     GameLoop();
+                    lastLoopTime = (float)gameTime.Elapsed.TotalMilliseconds;
                 }
             }
             catch (Exception e)
@@ -90,7 +100,6 @@ namespace Minesweeper
                 Draw();
 
                 //Reset
-                System.Threading.Thread.Sleep(10);
                 Keyboard.Clear();
                 sizeChanged = false;
             }
@@ -104,6 +113,8 @@ namespace Minesweeper
         /// <summary>The Update stage of the loop, only the current screen is updated witch is determined by the GameState</summary>
         private static void Update()
         {
+            DebugUtil.Update();
+
             //Check keyboard inputs
             if (Console.KeyAvailable == true)
             {
@@ -134,6 +145,7 @@ namespace Minesweeper
             {
 
             }
+            
         }
 
         /// <summary>The Draw stage of the loop,  only the current screen is drawn witch is determined by the GameState</summary>
@@ -163,6 +175,8 @@ namespace Minesweeper
                 {
 
                 }
+
+                DebugUtil.Draw();
             }
             else
             {

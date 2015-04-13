@@ -18,7 +18,7 @@ namespace Minesweeper.Screens
         //Labels
         private TextLabel version; //The version of the game
         private TextLabel controls; //Shows how to use the menu
-        private TextLabel shorvan; //ME
+        private TextLabel shorvan; //Me
 
         /// <summary>Initsalize the menu</summary>
         public MenuScreen()

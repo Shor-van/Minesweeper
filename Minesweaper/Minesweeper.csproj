@@ -71,7 +71,10 @@
     <Compile Include="Screens\UI\Arrow.cs" />
     <Compile Include="Screens\UI\SplashText.cs" />
     <Compile Include="Screens\UI\TextLabel.cs" />
+    <Compile Include="Sound\SoundManager.cs" />
+    <Compile Include="Sound\SoundThread.cs" />
     <Compile Include="Utils\CrashReporter.cs" />
+    <Compile Include="Utils\DebugUtil.cs" />
     <Compile Include="Utils\Keyboard.cs" />
     <Compile Include="Screens\UI\MenuText.cs" />
     <Compile Include="Program.cs" />

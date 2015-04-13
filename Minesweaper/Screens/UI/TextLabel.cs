@@ -12,6 +12,7 @@ namespace Minesweeper.Screens.UI
         private ConsoleColor color; //The color to draw the text with
 
         //Gets and sets
+        public string Text { get { return text; } set { text = value; } }
         public int PositionX { get { return posX; } set { posX = value; } }
         public int PositionY { get { return posY; } set { posY = value; } }
         public ConsoleColor Color { get { return color; } set { color = value; } }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Minesweeper.Utils;
+using System.Threading;
+using Minesweeper.Sound;
 
 namespace Minesweeper.Screens.UI
 {
@@ -16,7 +18,7 @@ namespace Minesweeper.Screens.UI
         bool enable; //Weather the player can select this option
 
         //Events
-        public delegate void BaseEventHandler(object sender, EventArgs e);
+        public delegate void BaseEventHandler(object sender, EventArgs e); //Base event handler
         public event BaseEventHandler Selected; //Event triggered when the player presses enter while this option is active
         public event BaseEventHandler HoveredOn; //Event triggered when the player switched to this item/this item bacame active
         public event BaseEventHandler HoveredOff; //Event triggered when the player sweitched off this item/this item when from active to inactive 
