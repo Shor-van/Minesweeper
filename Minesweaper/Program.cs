@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Minesweaper.Utils;
-using Minesweaper.Screens;
+using Minesweeper.Utils;
+using Minesweeper.Screens;
 
-namespace Minesweaper
+namespace Minesweeper
 {
     public enum GameState
     {
@@ -25,6 +25,7 @@ namespace Minesweaper
         public static ConsoleColor backgroundColor = ConsoleColor.Black; //The current background color
         public static GameState gameState = GameState.MenuState; //The "state" of the game, used to see witch screen to draw
         public static bool sizeChanged = true; //Weather the window size has changed 
+        public static Random rand = new Random(); //Random 
 
         //Screens
         private static MenuScreen menuScreen;
@@ -46,6 +47,11 @@ namespace Minesweaper
         {
             viewWidth = width;
             viewHeight = height;
+            
+            Console.SetWindowSize(viewWidth, viewHeight);
+            Console.BufferWidth = viewWidth;
+            Console.BufferHeight = viewHeight;
+
             sizeChanged = true;
         }
 
@@ -54,85 +60,131 @@ namespace Minesweaper
 
         static void Main(string[] args)
         {
-            //Setup gamewindow
-            Initalize();
-
-            //The game loop will be here, all Draw and Upadate mathods will be called from here
-            //in the form of check input then update objects then draw screen
-            while (true)
+            try
             {
-                if (!isExiting)
+                //Setup gamewindow
+                Initalize();
+
+                //The game loop will be here, all Draw and Upadate mathods will be called from here
+                //in the form of check input then update objects then draw screen
+                while (true)
                 {
-                    //Check keyboard inputs
-                    if (Console.KeyAvailable == true)
-                    {
-                        //Update the keyboard input manage
-                        Keyboard.Update();
-                    }
-
-                    //Update game objects
-                    if (gameState == GameState.IntroState)
-                    {
-
-                    }
-                    else if (gameState == GameState.MenuState)
-                    {
-                        menuScreen.Update();
-                        if (gameState != GameState.MenuState)
-                            switchingScreen = true;
-                    }
-                    else if (gameState == GameState.GamePlayState)
-                    {
-
-                    }
-                    else if (gameState == GameState.GameOverState)
-                    {
-                        
-                    }
-                    else if (gameState == GameState.ScoreState)
-                    {
-                        
-                    }
-
-                    //Check if game swichingScreen
-                    if (!switchingScreen)
-                    {
-                        //Draw game objects
-                        if (gameState == GameState.IntroState)
-                        {
-
-                        }
-                        else if (gameState == GameState.MenuState)
-                        {
-                            menuScreen.Draw();
-                        }
-                        else if (gameState == GameState.GamePlayState)
-                        {
-
-                        }
-                        else if (gameState == GameState.GameOverState)
-                        {
-
-                        }
-                        else if (gameState == GameState.ScoreState)
-                        {
-
-                        }
-                    }
-                    else
-                    {
-                        Console.Clear();
-                    }
-                    System.Threading.Thread.Sleep(16);
-                    Keyboard.Clear();
-                    sizeChanged = false;
-                }
-                else
-                {
-                    //exit -> Should show score screen?
-                    Environment.Exit(0);
+                    GameLoop();
                 }
             }
+            catch (Exception e)
+            {
+                CrashReporter.CreateCrashReport(e, new string[] { "This crash heppened in a area that was not monitored." });
+            }
+        }
+
+        /// <summary>The main game loop, Update -> Draw -> Reset</summary>
+        private static void GameLoop()
+        {
+            if (!isExiting)
+            {
+                //Update
+                Update();
+
+                //Draw
+                Draw();
+
+                //Reset
+                System.Threading.Thread.Sleep(10);
+                Keyboard.Clear();
+                sizeChanged = false;
+            }
+            else
+            {
+                //exit -> Should show score screen?
+                Environment.Exit(0);
+            }
+        }
+
+        /// <summary>The Update stage of the loop, only the current screen is updated witch is determined by the GameState</summary>
+        private static void Update()
+        {
+            //Check keyboard inputs
+            if (Console.KeyAvailable == true)
+            {
+                //Update the keyboard input manage
+                Keyboard.Update();
+            }
+
+            //Update game objects
+            if (gameState == GameState.IntroState)
+            {
+
+            }
+            else if (gameState == GameState.MenuState)
+            {
+                menuScreen.Update();
+                if (gameState != GameState.MenuState)
+                    switchingScreen = true;
+            }
+            else if (gameState == GameState.GamePlayState)
+            {
+
+            }
+            else if (gameState == GameState.GameOverState)
+            {
+
+            }
+            else if (gameState == GameState.ScoreState)
+            {
+
+            }
+        }
+
+        /// <summary>The Draw stage of the loop,  only the current screen is drawn witch is determined by the GameState</summary>
+        private static void Draw()
+        {
+            //Check if game swichingScreen
+            if (!switchingScreen)
+            {
+                //Draw game objects
+                if (gameState == GameState.IntroState)
+                {
+
+                }
+                else if (gameState == GameState.MenuState)
+                {
+                    menuScreen.Draw();
+                }
+                else if (gameState == GameState.GamePlayState)
+                {
+
+                }
+                else if (gameState == GameState.GameOverState)
+                {
+
+                }
+                else if (gameState == GameState.ScoreState)
+                {
+
+                }
+            }
+            else
+            {
+                Console.Clear();
+            }
+        }
+
+        /// <summary>Generates a random number smaller the spessifed max but greater or equal to the spesifed min</summary>
+        /// <param name="min">The minimu that the number can be</param>
+        /// <param name="max">The max that the number is smaller then</param>
+        /// <returns>A intager greater or equal to the min and smaller then the max</returns>
+        public static int GenerateRandom(int min, int max)
+        {
+            return rand.Next(min, max);
+        }
+
+        /// <param name="min">The minimu that the number can be</param>
+        /// <param name="max">The max that the number is smaller then</param>
+        /// <returns>A intager greater or equal to the min and smaller then the max</returns>
+        public static double GenerateRandom(float min, float max)
+        {
+            return min + (rand.NextDouble() * (max - min));
         }
     }
 }

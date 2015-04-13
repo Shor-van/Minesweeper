@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Minesweaper.Screens.UI;
-using Minesweaper.Utils;
+using Minesweeper.Screens.UI;
+using Minesweeper.Utils;
 
-namespace Minesweaper.Screens
+namespace Minesweeper.Screens
 {
 	public class MenuScreen
 	{
@@ -13,6 +13,7 @@ namespace Minesweaper.Screens
         private Arrow selectionArrow; //Arrow showing current selection
         private int selection; //The currectly selected option in the list 
         private TitleText tile; //The tile of the menu
+        private SplashText splashText; //The splash text under the tile
 
         //Labels
         private TextLabel version; //The version of the game
@@ -23,7 +24,8 @@ namespace Minesweaper.Screens
         public MenuScreen()
         {
             //Tile
-            tile = new TitleText("MINESWEEPER",ConsoleColor.Red,19,2);
+            tile = new TitleText("MINESWEEPER",ConsoleColor.Red,0,2);
+            splashText = new SplashText(0, 0, ConsoleColor.Cyan);
 
             //Options
             options = new List<MenuText>();
@@ -67,6 +69,12 @@ namespace Minesweaper.Screens
         /// <summary>Updates the menu, updates currently selected opytion</summary>
         public void Update()
         {
+            if (Program.switchingScreen)
+            {
+                selection = 0;
+                splashText.GenerateNewSplashText();
+            }
+
             Program.switchingScreen = false;
 
             if (Program.sizeChanged)
@@ -84,6 +92,10 @@ namespace Minesweaper.Screens
                 tile.PositionX = (Program.ViewWidth() / 2 - (tile.MeasureSize())[0] / 2);
                 tile.PositionY = 2;
 
+                //Splash
+                splashText.PositionX = Program.ViewWidth() / 2;
+                splashText.PositionY = tile.PositionY + (tile.MeasureSize()[1]);
+
                 //Labels
                 version.PositionX = 1;
                 version.PositionY = Program.ViewHieght() - 1;
@@ -94,6 +106,8 @@ namespace Minesweaper.Screens
                 shorvan.PositionX = ((Program.ViewWidth()-1) - shorvan.MeasureSize()[0]);
                 shorvan.PositionY = Program.ViewHieght() - 1;
             }
+
+            splashText.Update();
 
             //Update selection
             if (Keyboard.IsKeyPressed(ConsoleKey.W))
@@ -110,6 +124,8 @@ namespace Minesweaper.Screens
                 else
                     selection++;
             }
+            else if (Keyboard.IsKeyPressed(ConsoleKey.F1))
+                Program.switchingScreen = true;
 
             //Update core menu
             for (int i = 0; i < options.Count; i++)
@@ -131,6 +147,7 @@ namespace Minesweaper.Screens
         {
             //Tile
             tile.Draw();
+            splashText.Draw();
 
             //Menu
             selectionArrow.Draw();

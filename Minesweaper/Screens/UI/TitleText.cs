@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Minesweeper.Utils;
 
-namespace Minesweaper.Screens.UI
+namespace Minesweeper.Screens.UI
 {
     //Will handle all the drawing and update of the Title Texts
     public class TitleText
@@ -678,25 +679,9 @@ namespace Minesweaper.Screens.UI
                             break;
                     }
                 }
-                catch (ArgumentOutOfRangeException)
+                catch (ArgumentOutOfRangeException e)
                 {
-                    Console.Clear();
-                    Console.BackgroundColor = ConsoleColor.Blue;
-                    Console.Clear();
-                    Console.SetCursorPosition(0, 0);
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Console.WriteLine("Holy Cr*p on a stick, somethings wrong!");
-                    Console.WriteLine();
-                    Console.WriteLine("Error:ArgumentOutOfRangeException was thrown while drawing text:" + text);
-                    Console.WriteLine();
-                    Console.WriteLine("Variable information");
-                    Console.WriteLine("=====================");
-                    Console.WriteLine("left:" + left + " top:" + top + " letter dawing:" + letter[i]);
-                    Console.WriteLine();
-                    Console.WriteLine("*End of report*");
-                    Console.WriteLine("Press any key to close.");
-                    Console.ReadKey(true);
-                    Environment.Exit(0);
+                    CrashReporter.CreateCrashReport(e, new string[] { "Text being drawn:" + text, "Left:" + left + " Top:" + top, "letter dawing:" + letter[i] });
                 }
             }
             Console.ResetColor();

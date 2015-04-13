@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Minesweaper.Utils;
+using Minesweeper.Utils;
 
-namespace Minesweaper.Screens.UI
+namespace Minesweeper.Screens.UI
 {
     //This will handle the text used in the menus 
     public class MenuText
