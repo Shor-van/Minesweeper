@@ -32,6 +32,8 @@ namespace Minesweeper.Screens.UI
             posY = pPosY;
         }
 
+        /// <summary>Measures the size of the text, Note that its not in pixels but in tiles</summary>
+        /// <returns>A array that contains how much tile space the tile text takes in the window (0) width (1)height</returns>
         public int[] MeasureSize()
         {
             int[] size = new int[2];

@@ -12,6 +12,7 @@ namespace Minesweeper.Screens.UI
     {
         private static string[] splashTexts; //Array of the splash texts loaded from the file
 
+        private int id; //The ID of the splash text in the array of splashTexts, is used to get the original splashText
         private int posX, posY; //The top left location of the splash text on the screen
         private string text; //The splash text to draw
         private ConsoleColor color; //The color used to draw the text
@@ -21,6 +22,10 @@ namespace Minesweeper.Screens.UI
         public int PositionY { get { return posY; } set { posY = value; } }
         public ConsoleColor Color { get { return color; } set { color = value; } }
 
+        /// <summary>Base constructor, Also calls LoadSplashTexts() if splashTexts is null</summary>
+        /// <param name="posX">The left position on the screen at witch to draw the text</param>
+        /// <param name="posY">The top position at witch to draw the text</param>
+        /// <param name="color">The ConsoleColor at witch to draw the text</param>
         public SplashText(int posX, int posY, ConsoleColor color)
         {
             //Check if splash texts have been loaded
@@ -34,6 +39,7 @@ namespace Minesweeper.Screens.UI
             GenerateNewSplashText();
         }
 
+        /// <summary>Loads all the splash texts from the SplashTexts.txt file into the splashTexts array, should only be called once</summary>
         private static void LoadSplashTexts()
         {
             try
@@ -55,7 +61,7 @@ namespace Minesweeper.Screens.UI
                 if (tmpStrs.Count > 0)
                     splashTexts = tmpStrs.ToArray<string>();
                 else
-                    splashTexts = new string[] { "Slash texts failed to load/Not found." };
+                    splashTexts = new string[] { "Slpash texts failed to load/Not found." };
             }
             catch (Exception e)
             {
@@ -69,12 +75,45 @@ namespace Minesweeper.Screens.UI
             }
         }
 
+        /// <summary>Checks if the spesified char is a escape char</summary>
+        /// <param name="chara">The char to check</param>
+        /// <returns>True if the char is a escape char else false</returns>
+        private static bool IsEscapeChar(char chara)
+        {
+            switch (chara)
+            {
+                case '\a':
+                    return true;
+                case '\b':
+                    return true;
+                case '\f':
+                    return true;
+                case '\n':
+                    return true;
+                case '\r':
+                    return true;
+                case '\t':
+                    return true;
+                case '\v':
+                    return true;
+                case '\'':
+                    return true;
+                case '\"':
+                    return true;
+                case '\\':
+                    return true;
+            }
+            return false;
+        }
+
+        /// <summary>Selects a new slpash text string from the splashTexts array at random</summary>
         public void GenerateNewSplashText()
         {
             int idx = Program.GenerateRandom(0, splashTexts.Length);
             text = splashTexts[idx];
+            this.id = idx;
 
-            //Check if would fit
+            //Check if would fit in one line
             if (text.Length >= Program.ViewWidth() - posX)
             {
                 int change = text.Length - (Program.ViewWidth() - posX);
@@ -89,11 +128,28 @@ namespace Minesweeper.Screens.UI
         /// <summary>If the splash text contains '*' then they get replace with a random character else does nothing</summary>
         public void Update()
         {
-            if (text.Contains("*"))
+            if (splashTexts[id].Contains("*"))
             {
                 //Do the char swap thingy
+                char[] chars = splashTexts[id].ToCharArray();
+                text = "";
+                for (int i = 0; i < chars.Length; i++)
+                {
+                    //Change
+                    if (chars[i] == '*')
+                    {
+                        chars[i] = (char)Program.GenerateRandom(0, 128);
+
+                        //Anti space and escape chars
+                        while (chars[i] == ' ' || IsEscapeChar(chars[i]))
+                            chars[i] = (char)Program.GenerateRandom(0, 128);
+                    }
+                   
+                    //Rebuild
+                    text = text + chars[i];
+                }
             }
-        }
+        }        
 
         /// <summary>Draws the splash text at the set location and color</summary>
         public void Draw()
