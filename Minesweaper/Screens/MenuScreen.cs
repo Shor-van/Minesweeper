@@ -48,6 +48,12 @@ namespace Minesweeper.Screens
             selection = 0;
         }
 
+        /// <summary>In the future things that are drawn once like the tile and the labels will bee drawn here</summary>
+        public void SetupScreen()
+        {
+
+        }
+
         //event handlers
         private void OnPlayGameSelected(object sender, EventArgs e)
         {

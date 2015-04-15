@@ -77,9 +77,7 @@ namespace Minesweeper
                 //in the form of check input then update objects then draw screen
                 while (true)
                 {
-                    gameTime.Restart();
                     GameLoop();
-                    lastLoopTime = (float)gameTime.Elapsed.TotalMilliseconds;
                 }
             }
             catch (Exception e)
@@ -91,6 +89,7 @@ namespace Minesweeper
         /// <summary>The main game loop, Update -> Draw -> Reset</summary>
         private static void GameLoop()
         {
+            gameTime.Restart();
             if (!isExiting)
             {
                 //Update
@@ -108,6 +107,7 @@ namespace Minesweeper
                 //exit -> Should show score screen?
                 Environment.Exit(0);
             }
+            lastLoopTime = (float)gameTime.Elapsed.TotalMilliseconds;
         }
 
         /// <summary>The Update stage of the loop, only the current screen is updated witch is determined by the GameState</summary>
