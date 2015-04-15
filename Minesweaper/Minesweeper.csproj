@@ -64,6 +64,7 @@
     <Compile Include="GameBoard\Board.cs" />
     <Compile Include="GameBoard\BoardSettings.cs" />
     <Compile Include="GameBoard\Cell.cs" />
+    <Compile Include="Screens\CustomSettingsScreen.cs" />
     <Compile Include="Screens\GameOptions.cs" />
     <Compile Include="Screens\GameOverScreen.cs" />
     <Compile Include="Screens\GameScreen.cs" />
@@ -110,7 +111,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Notes.txt" />
-    <Content Include="Assets\XMLFile1.xml" />
     <EmbeddedResource Include="Assets\SplashTexts.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

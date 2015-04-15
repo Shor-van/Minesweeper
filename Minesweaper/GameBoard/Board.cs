@@ -23,7 +23,7 @@ namespace Minesweeper.GameBoard
         public int PositionX { get { return posX; } set { posX = value; } }
         public int PositionY { get { return posY; } set { posY = value; } }
 
-        public Board(BoardSize size)
+        public Board(BoardSettings settings)
         {
 
         }

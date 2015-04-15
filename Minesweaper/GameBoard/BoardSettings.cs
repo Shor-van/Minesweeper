@@ -31,9 +31,7 @@ namespace Minesweeper.GameBoard
             this.maxMines = maxMines;
         }
 
-        /// <summary>
-        /// Creats board settings based on the spesified size
-        /// </summary>
+        /// <summary>Creates board settings based on the spesified size</summary>
         /// <param name="size">The pre-defined size of the board</param>
         /// <returns>A BoardSettings object based on the pre-defined size of the board</returns>
         public static BoardSettings GetPresetData(BoardSize size)
@@ -41,6 +39,7 @@ namespace Minesweeper.GameBoard
             switch (size)
             {
                 case BoardSize.Small:
+                    return new BoardSettings(10, 10, 30, 40);
                     break;
                 case BoardSize.Medium:
                     break;

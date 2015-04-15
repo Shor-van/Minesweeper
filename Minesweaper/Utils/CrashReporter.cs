@@ -16,6 +16,7 @@ namespace Minesweeper.Utils
             Console.SetCursorPosition(0, 0);
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Holy Cr*p on a stick, somethings wrong!");
+            Console.WriteLine(Console.Title + " Has crashed, GameState:" + Program.gameState);
             Console.WriteLine();
             Console.WriteLine("Exception:" + e.Message);
             Console.WriteLine();

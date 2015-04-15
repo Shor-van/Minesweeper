@@ -36,6 +36,7 @@ namespace Minesweeper
 
         //Screens
         private static MenuScreen menuScreen;
+        private static GameOptions gameOptionsScreen;
 
         private static int viewWidth = 100, viewHeight = 34;
 
@@ -49,6 +50,7 @@ namespace Minesweeper
             gameTime = new Stopwatch();
 
             menuScreen = new MenuScreen();
+            gameOptionsScreen = new GameOptions();
         }
 
         public static void ChangeWindowSize(int width, int height)
@@ -133,6 +135,12 @@ namespace Minesweeper
                 if (gameState != GameState.MenuState)
                     switchingScreen = true;
             }
+            else if(gameState == GameState.GameOptionState)
+            {
+                gameOptionsScreen.Update();
+                if (gameState != GameState.GameOptionState)
+                    switchingScreen = true;
+            }
             else if (gameState == GameState.GamePlayState)
             {
 
@@ -162,6 +170,10 @@ namespace Minesweeper
                 else if (gameState == GameState.MenuState)
                 {
                     menuScreen.Draw();
+                }
+                else if (gameState == GameState.GameOptionState)
+                {
+                    gameOptionsScreen.Draw();
                 }
                 else if (gameState == GameState.GamePlayState)
                 {
