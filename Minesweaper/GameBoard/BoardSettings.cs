@@ -40,17 +40,15 @@ namespace Minesweeper.GameBoard
             {
                 case BoardSize.Small:
                     return new BoardSettings(10, 10, 30, 40);
-                    break;
                 case BoardSize.Medium:
-                    break;
+                    return new BoardSettings(15, 15, 45, 55);
                 case BoardSize.Large:
-                    break;
+                    return new BoardSettings(25, 25, 57, 65);                   
                 case BoardSize.Huge:
-                    break;
+                    return new BoardSettings(35, 35, 65, 75);        
                 default:
-                    break;
+                    return new BoardSettings(10, 10, 30, 40);
             }
-            return null;
         }
     }
 }
