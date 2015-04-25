@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Minesweeper.Screens.UI;
 using Minesweeper.Utils;
+using Minesweeper.GameBoard;
 
 namespace Minesweeper.Screens
 {
@@ -53,24 +54,28 @@ namespace Minesweeper.Screens
         }
 
         //Venet Handlers
-        private void OnSmallSelected(object sender, EventArgs e)
+        private void OnSmallSelected(object sender, EventArgs e)//Setup board with small settkings
         {
-
+            Program.SetUpNewGame(BoardSettings.GetPresetData(BoardSize.Small));
+            return;
         }
 
-        private void OnMediumSelected(object sender, EventArgs e)
+        private void OnMediumSelected(object sender, EventArgs e)//Setupo board with medium settings
         {
-
+            Program.SetUpNewGame(BoardSettings.GetPresetData(BoardSize.Medium));
+            return;
         }
 
-        private void OnLargeSelected(object sender, EventArgs e)
+        private void OnLargeSelected(object sender, EventArgs e)//Setup board with large settings
         {
-
+            Program.SetUpNewGame(BoardSettings.GetPresetData(BoardSize.Large));
+            return;
         }
 
-        private void OnCustomSelected(object sender, EventArgs e)
+        private void OnCustomSelected(object sender, EventArgs e)//Switch to custom settings screen
         {
-
+            Program.gameState = GameState.CustomSettingState;
+            return;
         }
 
         /// <summary>Updates the menu, updates currently selected opytion</summary>

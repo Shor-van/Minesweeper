@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Minesweeper.GameBoard;
+using Minesweeper.Screens.UI;
 
 namespace Minesweeper.Screens
 {
     public class GameScreen
     {
         private Board gameBoard; //The gane board contains cells
+        private InfoPenel penel; //Info penel showing amount of time passed, and number of mines to find
 
         /// <summary>Initsalize the menu</summary>
         public GameScreen()
@@ -20,7 +22,8 @@ namespace Minesweeper.Screens
         /// <param name="settings">A BoardSettings object spesifing the board settings</param>
         public void SetupGameBoard(BoardSettings settings)
         {
-            gameBoard = new Board(settings);
+            gameBoard = new Board(0, 0, settings);
+            penel = new InfoPenel((Program.ViewWidth() / 2) - (35 / 2), 0, 35, 3, ConsoleColor.White, ConsoleColor.DarkBlue);
         }
 
         /// <summary>Checks if the game board has been setup</summary>
@@ -35,13 +38,19 @@ namespace Minesweeper.Screens
         /// <summary>Updates the game board</summary>
         public void Update()
         {
+            if (Program.switchingScreen)
+            {
+                penel.DrawBackground();
+            }
 
+            Program.switchingScreen = false;
+            penel.Update(gameBoard);
         }
 
         /// <summary>Draws the game board</summary>
         public void Draw()
         {
-
+            penel.Draw();
         }
     }
 }

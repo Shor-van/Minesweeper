@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Minesweeper.Screens
 {
-    class GameOverScreen
+    public class GameOverScreen
     {
     }
 }

@@ -6,6 +6,7 @@ using Minesweeper.Utils;
 using Minesweeper.Screens;
 using System.Threading;
 using System.Diagnostics;
+using Minesweeper.GameBoard;
 
 namespace Minesweeper
 {
@@ -17,7 +18,8 @@ namespace Minesweeper
         GamePlayState,
         GameOverState,
         ScoreState,
-        HelpState
+        HelpState,
+        CustomSettingState,
     }
 
     class Program
@@ -37,6 +39,7 @@ namespace Minesweeper
         //Screens
         private static MenuScreen menuScreen;
         private static GameOptions gameOptionsScreen;
+        private static GameScreen gameScreen;
 
         private static int viewWidth = 100, viewHeight = 34;
 
@@ -51,6 +54,7 @@ namespace Minesweeper
 
             menuScreen = new MenuScreen();
             gameOptionsScreen = new GameOptions();
+            gameScreen = new GameScreen();
         }
 
         public static void ChangeWindowSize(int width, int height)
@@ -132,18 +136,23 @@ namespace Minesweeper
             else if (gameState == GameState.MenuState)
             {
                 menuScreen.Update();
+
                 if (gameState != GameState.MenuState)
                     switchingScreen = true;
             }
             else if(gameState == GameState.GameOptionState)
             {
                 gameOptionsScreen.Update();
+                
                 if (gameState != GameState.GameOptionState)
                     switchingScreen = true;
             }
             else if (gameState == GameState.GamePlayState)
             {
-
+                gameScreen.Update();
+                
+                if (gameState != GameState.GamePlayState)
+                    switchingScreen = true;
             }
             else if (gameState == GameState.GameOverState)
             {
@@ -177,7 +186,7 @@ namespace Minesweeper
                 }
                 else if (gameState == GameState.GamePlayState)
                 {
-
+                    gameScreen.Draw();
                 }
                 else if (gameState == GameState.GameOverState)
                 {
@@ -188,12 +197,21 @@ namespace Minesweeper
 
                 }
 
-                DebugUtil.Draw();
+                //DebugUtil.Draw();
             }
             else
             {
                 Console.Clear();
             }
+        }
+
+        /// <summary>Sets up a new game</summary>
+        /// <param name="settings">A BoardSettings object defining how to setup the board</param>
+        public static void SetUpNewGame(BoardSettings settings)
+        {
+            gameScreen.SetupGameBoard(settings);
+            gameState = GameState.GamePlayState;
+            switchingScreen = true;            
         }
 
         /// <summary>Generates a random number smaller the spessifed max but greater or equal to the spesifed min</summary>

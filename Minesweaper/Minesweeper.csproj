@@ -71,6 +71,7 @@
     <Compile Include="Screens\HelpScreen.cs" />
     <Compile Include="Screens\HighscoreScreen.cs" />
     <Compile Include="Screens\UI\Arrow.cs" />
+    <Compile Include="Screens\UI\InfoPenel.cs" />
     <Compile Include="Screens\UI\SplashText.cs" />
     <Compile Include="Screens\UI\TextLabel.cs" />
     <Compile Include="Sound\SoundManager.cs" />

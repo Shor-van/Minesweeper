@@ -8,10 +8,10 @@ namespace Minesweeper.GameBoard
     /// <summary>Preset board sizes, they are square</summary>
     public enum BoardSize
     {
-        Small = 10,
-        Medium = 20,
-        Large = 25,
-        Huge = 30
+        Small,
+        Medium,
+        Large,
+        Huge
     }
     public class Board
     {
@@ -26,9 +26,16 @@ namespace Minesweeper.GameBoard
 
         /// <summary>Main constructor</summary>
         /// <param name="settings">A BoardSettings object containing information on how to create the board</param>
-        public Board(BoardSettings settings)
+        public Board(int posX, int posY, BoardSettings settings)
         {
+            //Base settings
+            this.posX = posX;
+            this.posY = posY;
+            this.selX = settings.Width / 2;
+            this.selY = settings.Height / 2;
 
+            //Cells
+            cells = new Cell[settings.Width, settings.Height];
         }
 
         /// <summary>Overload constructor </summary>
