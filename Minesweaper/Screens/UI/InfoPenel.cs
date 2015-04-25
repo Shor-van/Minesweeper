@@ -60,7 +60,23 @@ namespace Minesweeper.Screens.UI
         {
             if (Program.sizeChanged)
             {
-                
+                RecalculatePositions();
+            }
+        }
+
+        /// <summary>Draws items that are drawn once</summary>
+        public void OneTimeDraw()
+        {
+            //Draw base background
+            for (int i = posX; i < width + posX; i++)
+            {
+                for (int j = posY; j < height + posY; j++)
+                {
+                    Console.SetCursorPosition(i, j);
+                    Console.BackgroundColor = bColor;
+                    Console.Write(" ");
+                    Console.ResetColor();
+                }
             }
         }
 
@@ -74,21 +90,6 @@ namespace Minesweeper.Screens.UI
             mines.Draw();
 
             Program.backgroundColor = ConsoleColor.Black;
-        }
-
-        public void DrawBackground()
-        {
-            //Draw base background
-            for (int i = posX; i < width + posX; i++)
-            {
-                for (int j = posY; j < height + posY; j++)
-                {
-                    Console.SetCursorPosition(i, j);
-                    Console.BackgroundColor = bColor;
-                    Console.Write(" ");
-                    Console.ResetColor();
-                }
-            }
         }
     }
 }

@@ -40,7 +40,7 @@ namespace Minesweeper.Screens
         {
             if (Program.switchingScreen)
             {
-                penel.DrawBackground();
+                penel.OneTimeDraw();
             }
 
             Program.switchingScreen = false;
