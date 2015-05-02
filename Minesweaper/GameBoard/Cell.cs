@@ -28,9 +28,25 @@ namespace Minesweeper.GameBoard
         /// <param name="isMine">Weather the cell contains a mine</param>
         public Cell(int posX, int posY, Board owner, bool isMine)
         {
+            this.posX = posX;
+            this.posY = posY;
+            this.owner = owner;
+            this.isMine = isMine;
+        }
+
+        /// <summary>Oppens this cell, if no mine is near connected cells are opened</summary>
+        public void OpenCell()
+        {
 
         }
 
+        /// <summary>Draw call used to draw one time</summary>
+        public void DrawOnce()
+        {
+
+        }
+
+        //Loop
         public void Update()
         {
 

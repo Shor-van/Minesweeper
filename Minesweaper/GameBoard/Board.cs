@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Minesweeper.GameBoard
 {
-    /// <summary>Preset board sizes, they are square</summary>
+    /// <summary>Preset board sizes</summary>
     public enum BoardSize
     {
         Small,
@@ -16,6 +16,7 @@ namespace Minesweeper.GameBoard
     public class Board
     {
         private Cell[,] cells; //The cells of the board
+        private int sizeX, sizeY; //The menrer of cells on the x and y axis that the board has
         private int posX, posY; //The top left location of the board on the screen
         private int selX, selY; //The x and y cell that the player is selecting
 
@@ -36,6 +37,90 @@ namespace Minesweeper.GameBoard
 
             //Cells
             cells = new Cell[settings.Width, settings.Height];
+
+            for (int x = 0; x < settings.Width; x++)
+            {
+                for (int y = 0; y < settings.Height; y++)
+                {
+                    
+                }
+            }
+        }
+
+        /// <summary>Opens the cell at the x and y location, if cell has no mines near it connected cells are opened</summary>
+        /// <param name="x">The x location of the cell in the array</param>
+        /// <param name="y">The y location of the cell in the array</param>
+        public void OpenCell(int x, int y)
+        {
+            cells[x, y].IsOpen = true;
+
+            //Ceck if is not mine
+            if (cells[x, y].IsMine != true)
+            {
+                //Get number of mines around
+                int mines = GetNumberOfMinesAround(x, y);
+                
+                //if no mines near open connected cells
+                if (mines == 0)
+                {
+                    cells[x, y].Text = " ";
+                    OpenCell(x, y - 1);
+                    OpenCell(x - 1, y);
+                    OpenCell(x, y + 1);
+                    OpenCell(x + 1, y);
+                }
+                else
+                {
+                    cells[x, y].Text = mines.ToString();
+                }
+            }
+            else
+            {
+                //BOOM
+                ShowMines();
+            }
+        }
+
+        /// <summary> Gets the number of mines around the cell</summary>
+        /// <param name="x">The X location of the cell in the array</param>
+        /// <param name="y">The Y location of thecell in the array</param>
+        /// <returns>The number of mines aroun the cell</returns>
+        public int GetNumberOfMinesAround(int x, int y)
+        {
+            int mines = 0;
+            if (cells[x - 1, y - 1].IsMine == true)
+                mines++;
+            if (cells[x, y - 1].IsMine == true)
+                mines++;
+            if (cells[x + 1, y - 1].IsMine == true)
+                mines++;
+            if (cells[x + 1, y].IsMine == true)
+                mines++;
+            if (cells[x + 1, y + 1].IsMine == true)
+                mines++;
+            if (cells[x, y + 1].IsMine == true)
+                mines++;
+            if (cells[x - 1, y + 1].IsMine == true)
+                mines++;
+            if (cells[x - 1, y].IsMine == true)
+                mines++;
+            return mines;
+        }
+
+        /// <summary>Gets the number of mines on the board</summary>
+        /// <returns>The number of mines on the board</returns>
+        public int GetNumberOfMines()
+        {
+            int mines = 0;
+            for (int x = 0; x < sizeX; x++)
+            {
+                for (int y = 0; y < sizeY; y++)
+                {
+                    if (cells[x, y].IsMine == true)
+                        mines++;
+                }
+            }
+            return mines;
         }
 
         /// <summary>Overload constructor </summary>
@@ -56,6 +141,19 @@ namespace Minesweeper.GameBoard
             //Chech if currrect cell loop is cell
             //return array x y
             return null;
+        }
+
+        /// <summary>Shows all the cells that are mines</summary>
+        public void ShowMines()
+        {
+            for (int x = 0; x < sizeX; x++)
+            {
+                for (int y = 0; y < sizeY; y++)
+                {
+                    if (cells[x, y].IsMine == true)
+                        cells[x, y].Text = "M";
+                }
+            }
         }
 
         /// <summary>Updates the board</summary>
