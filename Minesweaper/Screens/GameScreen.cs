@@ -10,7 +10,8 @@ namespace Minesweeper.Screens
     public class GameScreen
     {
         private Board gameBoard; //The gane board contains cells
-        private InfoPenel penel; //Info penel showing amount of time passed, and number of mines to find
+        private InfoPanel panel; //Info panel showing amount of time passed, and number of mines to find
+        private ControlPanel ctrlPanel; //Panel showing the controls
 
         /// <summary>Initsalize the menu</summary>
         public GameScreen()
@@ -22,8 +23,8 @@ namespace Minesweeper.Screens
         /// <param name="settings">A BoardSettings object spesifing the board settings</param>
         public void SetupGameBoard(BoardSettings settings)
         {
-            gameBoard = new Board(0, 3, settings);
-            penel = new InfoPenel((Program.ViewWidth() / 2) - (35 / 2), 0, 35, 3, ConsoleColor.White, ConsoleColor.DarkBlue);
+            gameBoard = new Board(2, (Program.ViewHieght() / 2) - (settings.Height / 2), settings);
+            panel = new InfoPanel((Program.ViewWidth() / 2) - (35 / 2), 0, 35, 3, ConsoleColor.White, ConsoleColor.DarkBlue);
         }
 
         /// <summary>Checks if the game board has been setup</summary>
@@ -40,19 +41,19 @@ namespace Minesweeper.Screens
         {
             if (Program.switchingScreen)
             {
-                penel.OneTimeDraw();
+                panel.OneTimeDraw();
                 gameBoard.Draw();
             }
 
             Program.switchingScreen = false;
-            penel.Update(gameBoard);
+            panel.Update(gameBoard);
             gameBoard.Update();
         }
 
         /// <summary>Draws the game board</summary>
         public void Draw()
         {
-            penel.Draw();
+            panel.Draw();
         }
     }
 }

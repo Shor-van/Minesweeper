@@ -57,6 +57,20 @@ namespace Minesweeper.GameBoard
             }
 
             //Add mimes
+            int mines = Program.GenerateRandom(settings.MinMines, settings.MaxMines);
+            for (int i = 0; i < mines; i++)
+            {
+                int x = Program.GenerateRandom(0, settings.Width);
+                int y = Program.GenerateRandom(0, settings.Height);
+
+                while (cells[x, y].IsMine)
+                {
+                    x = Program.GenerateRandom(0, settings.Width);
+                    y = Program.GenerateRandom(0, settings.Height);
+                }
+
+                cells[x, y].IsMine = true;
+            }
         }
 
         /// <summary>Opens the cell at the x and y location, if cell has no mines near it connected cells are opened</summary>
@@ -78,14 +92,26 @@ namespace Minesweeper.GameBoard
                     if (mines == 0)
                     {
                         cells[x, y].Text = " ";
-                        if(IsInBounds(x, y - 1) && cells[x, y - 1].IsOpen == false)
-                            cellsToOpen.Add(new CellToOpen(cells[x, y - 1], x, y - 1));
+                        if (IsInBounds(x, y - 1) && cells[x, y - 1].IsOpen == false)
+                        {
+                            if(!IsCellScheduledToBeOpened(cells[x, y - 1]))
+                                cellsToOpen.Add(new CellToOpen(cells[x, y - 1], x, y - 1));
+                        }
                         if (IsInBounds(x + 1, y) && cells[x + 1, y].IsOpen == false)
-                            cellsToOpen.Add(new CellToOpen(cells[x - 1, y], x - 1, y));
+                        {
+                            if (!IsCellScheduledToBeOpened(cells[x + 1, y]))
+                                cellsToOpen.Add(new CellToOpen(cells[x + 1, y], x + 1, y));
+                        }
                         if (IsInBounds(x, y + 1) && cells[x, y + 1].IsOpen == false)
-                            cellsToOpen.Add(new CellToOpen(cells[x, y + 1], x, y + 1));
-                        if (IsInBounds(x + 1, y) && cells[x + 1, y].IsOpen == false)
-                        cellsToOpen.Add(new CellToOpen(cells[x + 1, y], x + 1, y));
+                        {
+                            if (!IsCellScheduledToBeOpened(cells[x, y + 1]))
+                                cellsToOpen.Add(new CellToOpen(cells[x, y + 1], x, y + 1));
+                        }
+                        if (IsInBounds(x - 1, y) && cells[x - 1, y].IsOpen == false)
+                        {
+                            if (!IsCellScheduledToBeOpened(cells[x - 1, y]))
+                                cellsToOpen.Add(new CellToOpen(cells[x - 1, y], x - 1, y));
+                        }
                     }
                     else
                     {
@@ -95,6 +121,7 @@ namespace Minesweeper.GameBoard
                 else
                 {
                     //BOOM
+                    //show mines whait some time then show game over screen
                     ShowMines();
                 }
 
@@ -116,6 +143,16 @@ namespace Minesweeper.GameBoard
             {
                 OpenCell(cell.TileX, cell.TileY);
             }
+        }
+
+        public bool IsCellScheduledToBeOpened(Cell cell)
+        {
+            foreach (CellToOpen celltoOpen in cellsToOpen)
+            {
+                if (celltoOpen.IsCell(cell))
+                    return true;
+            }
+            return false;
         }
 
         /// <summary> Gets the number of mines around the cell</summary>
@@ -189,6 +226,8 @@ namespace Minesweeper.GameBoard
                 {
                     if (cells[x, y].IsMine == true)
                         cells[x, y].Text = "M";
+
+                    cells[x, y].Draw();
                 }
             }
         }
@@ -249,6 +288,20 @@ namespace Minesweeper.GameBoard
             else if (Keyboard.IsKeyPressed(ConsoleKey.Enter))
             {
                 OpenCell(selX, selY);
+            }
+            else if (Keyboard.IsKeyPressed(ConsoleKey.E))
+            {
+                if (cells[selX, selY].IsOpen == false)
+                {
+                    if (cells[selX, selY].Text == "_")
+                        cells[selX, selY].Text = "F";
+                    else if (cells[selX, selY].Text == "F")
+                        cells[selX, selY].Text = "?";
+                    else if (cells[selX, selY].Text == "?")
+                        cells[selX, selY].Text = "_";
+
+                    cells[selX, selY].Draw(true);
+                }
             }
         }
 

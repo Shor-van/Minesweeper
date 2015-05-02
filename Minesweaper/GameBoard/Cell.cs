@@ -19,7 +19,7 @@ namespace Minesweeper.GameBoard
 
         //Gets and sets
         public bool IsOpen { get { return isOpen; } set { isOpen = value; } }
-        public bool IsMine { get { return isMine; } }
+        public bool IsMine { get { return isMine; } set { isMine = value; } }
         public string Text { get { return text; } set { text = value; } }
         public Board Owner { get { return owner; } }
         public int PositionX { get { return posX; } set { posX = value; } }
@@ -63,7 +63,22 @@ namespace Minesweeper.GameBoard
                     Console.BackgroundColor = openColor;
 
                 Console.SetCursorPosition(posX, posY);
-                Console.Write("|" + text + "|");
+                Console.Write("| |");
+
+                if (text != "_" && text != "M" && text != "F" && text != "?")
+                    Console.ForegroundColor = ConsoleColor.Green;
+
+                if (text == "M")
+                    Console.ForegroundColor = ConsoleColor.Red;
+
+                if (text == "F")
+                    Console.ForegroundColor = ConsoleColor.Blue;
+
+                if (text == "?")
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+
+                Console.SetCursorPosition(posX + 1, posY);
+                Console.Write(text);
             }
             else 
             {
@@ -73,7 +88,22 @@ namespace Minesweeper.GameBoard
                     Console.BackgroundColor = closedColor;
                 
                 Console.SetCursorPosition(posX, posY);
-                Console.Write("|" + text + "|");
+                Console.Write("| |");
+
+                if (text != "_" && text != "M" && text != "F" && text != "?")
+                    Console.ForegroundColor = ConsoleColor.Green;
+
+                if (text == "M")
+                    Console.ForegroundColor = ConsoleColor.Red;
+
+                if (text == "F")
+                    Console.ForegroundColor = ConsoleColor.Blue;
+
+                if (text == "?")
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+
+                Console.SetCursorPosition(posX + 1, posY);
+                Console.Write(text);
             }
         }
     }

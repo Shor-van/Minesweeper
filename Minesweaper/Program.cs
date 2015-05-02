@@ -32,6 +32,7 @@ namespace Minesweeper
         public static Random rand = new Random(); //Random 
         public static Thread sound; //Sound Thread
         public static float lastLoopTime; //The time that the last game loop took to complete
+        public static bool showDebug = false; //Weather or not to draw the debug screen
         
         //GameTime
         public static Stopwatch gameTime;
@@ -46,7 +47,7 @@ namespace Minesweeper
         private static void Initalize()
         {
             Console.SetWindowSize(viewWidth, viewHeight);
-            Console.Title = "Minesweeper V0.02";
+            Console.Title = "Minesweeper V0.53";
             Console.CursorVisible = false;
             Console.BufferWidth = viewWidth;
             Console.BufferHeight = viewHeight;
@@ -128,6 +129,14 @@ namespace Minesweeper
                 Keyboard.Update();
             }
 
+            if (Keyboard.IsKeyPressed(ConsoleKey.F2))
+            {
+                if (showDebug)
+                    showDebug = false;
+                else
+                    showDebug = true;
+            }
+
             //Update game objects
             if (gameState == GameState.IntroState)
             {
@@ -197,7 +206,8 @@ namespace Minesweeper
 
                 }
 
-                DebugUtil.Draw();
+                if(showDebug)
+                    DebugUtil.Draw();
             }
             else
             {

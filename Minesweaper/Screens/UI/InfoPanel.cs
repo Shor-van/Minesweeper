@@ -7,7 +7,7 @@ using Minesweeper.GameBoard;
 namespace Minesweeper.Screens.UI
 {
     //Info penel
-    public class InfoPenel
+    public class InfoPanel
     {
         private int posX, posY; //Location of the info penel
         private int width, height; //The widthn and height of the indo penel
@@ -30,7 +30,7 @@ namespace Minesweeper.Screens.UI
         /// <param name="height">The height of the info penel</param>
         /// <param name="fColor">The color of the text to used</param>
         /// <param name="bColor">The color of the background color</param>
-        public InfoPenel(int posX, int posY, int width, int height, ConsoleColor fColor, ConsoleColor bColor)
+        public InfoPanel(int posX, int posY, int width, int height, ConsoleColor fColor, ConsoleColor bColor)
         {
             this.posX = posX;
             this.posY = posY;
@@ -62,6 +62,8 @@ namespace Minesweeper.Screens.UI
             {
                 RecalculatePositions();
             }
+
+            mines.Text = "MINES:" + board.GetNumberOfMines();
         }
 
         /// <summary>Draws items that are drawn once</summary>
