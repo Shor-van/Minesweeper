@@ -7,6 +7,10 @@ namespace Minesweeper.GameBoard
 {
     public class Cell
     {
+        //Static members
+        private static ConsoleColor openColor = ConsoleColor.DarkCyan; //The backcolor used to draw open cells
+        private static ConsoleColor closedColor = ConsoleColor.Cyan; //The backcolor used to draw closed cells
+
         private bool isOpen; //Weather the cell is opened       
         private bool isMine; //Weather the cell has a mine
         private string text; //What is shown in the cell
@@ -32,16 +36,11 @@ namespace Minesweeper.GameBoard
             this.posY = posY;
             this.owner = owner;
             this.isMine = isMine;
+            this.text = "_";
         }
 
         /// <summary>Oppens this cell, if no mine is near connected cells are opened</summary>
         public void OpenCell()
-        {
-
-        }
-
-        /// <summary>Draw call used to draw one time</summary>
-        public void DrawOnce()
         {
 
         }
@@ -52,11 +51,29 @@ namespace Minesweeper.GameBoard
 
         }
 
-        public void Draw()
+        /// <summary>Draws the cell</summary>
+        public void Draw(bool selected = false)
         {
+            Console.ForegroundColor = ConsoleColor.DarkGray;
             if (isOpen)
             {
+                if (selected)
+                    Console.BackgroundColor = ConsoleColor.DarkRed;
+                else
+                    Console.BackgroundColor = openColor;
 
+                Console.SetCursorPosition(posX, posY);
+                Console.Write("|" + text + "|");
+            }
+            else 
+            {
+                if (selected)
+                    Console.BackgroundColor = ConsoleColor.DarkRed;
+                else
+                    Console.BackgroundColor = closedColor;
+                
+                Console.SetCursorPosition(posX, posY);
+                Console.Write("|" + text + "|");
             }
         }
     }

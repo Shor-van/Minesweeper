@@ -20,7 +20,7 @@ Boop!
 The force is strong with this one!
 The force is weak with this one!
 Dolphin free!
-*** is ****** so I say *** whould be **** ***!
+*** is ****** so I say *** whould be *******!
 ******* ************* ****** ***!
 if(****** == ****) then **** = ********;
 </3
@@ -28,3 +28,8 @@ Who, who who whoooooooo!
 The game is on
 8246824682468246824682468246!
 Have a gold star!
+Round and round!
+Fancy splash text **********!
+Less then 3!
+Less then or equal 3!
+Enter cheat code!

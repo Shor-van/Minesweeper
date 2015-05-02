@@ -197,7 +197,7 @@ namespace Minesweeper
 
                 }
 
-                //DebugUtil.Draw();
+                DebugUtil.Draw();
             }
             else
             {

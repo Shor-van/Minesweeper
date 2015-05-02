@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Minesweeper.Utils;
 
 namespace Minesweeper.GameBoard
 {
@@ -19,6 +20,7 @@ namespace Minesweeper.GameBoard
         private int sizeX, sizeY; //The menrer of cells on the x and y axis that the board has
         private int posX, posY; //The top left location of the board on the screen
         private int selX, selY; //The x and y cell that the player is selecting
+        private List<CellToOpen> cellsToOpen; //A list of cells to be open in the next loop
 
         //Gets and sets
         public Cell[,] Cells { get { return cells; } set { cells = value; } }
@@ -34,17 +36,27 @@ namespace Minesweeper.GameBoard
             this.posY = posY;
             this.selX = settings.Width / 2;
             this.selY = settings.Height / 2;
+            this.sizeX = settings.Width;
+            this.sizeY = settings.Height;
+            cellsToOpen = new List<CellToOpen>();
 
             //Cells
             cells = new Cell[settings.Width, settings.Height];
 
+            //Create cells
+            int xShift = 0, yShift = 0;
             for (int x = 0; x < settings.Width; x++)
             {
                 for (int y = 0; y < settings.Height; y++)
                 {
-                    
+                    cells[x, y] = new Cell(posX + xShift, posY + yShift, this, false);
+                    yShift += 1;
                 }
+                xShift += 3;
+                yShift = 0;
             }
+
+            //Add mimes
         }
 
         /// <summary>Opens the cell at the x and y location, if cell has no mines near it connected cells are opened</summary>
@@ -52,32 +64,57 @@ namespace Minesweeper.GameBoard
         /// <param name="y">The y location of the cell in the array</param>
         public void OpenCell(int x, int y)
         {
-            cells[x, y].IsOpen = true;
-
-            //Ceck if is not mine
-            if (cells[x, y].IsMine != true)
+            if (IsInBounds(x, y))
             {
-                //Get number of mines around
-                int mines = GetNumberOfMinesAround(x, y);
-                
-                //if no mines near open connected cells
-                if (mines == 0)
+                cells[x, y].IsOpen = true;
+
+                //Ceck if is not mine
+                if (cells[x, y].IsMine != true)
                 {
-                    cells[x, y].Text = " ";
-                    OpenCell(x, y - 1);
-                    OpenCell(x - 1, y);
-                    OpenCell(x, y + 1);
-                    OpenCell(x + 1, y);
+                    //Get number of mines around
+                    int mines = GetNumberOfMinesAround(x, y);
+
+                    //if no mines near open connected cells
+                    if (mines == 0)
+                    {
+                        cells[x, y].Text = " ";
+                        if(IsInBounds(x, y - 1) && cells[x, y - 1].IsOpen == false)
+                            cellsToOpen.Add(new CellToOpen(cells[x, y - 1], x, y - 1));
+                        if (IsInBounds(x + 1, y) && cells[x + 1, y].IsOpen == false)
+                            cellsToOpen.Add(new CellToOpen(cells[x - 1, y], x - 1, y));
+                        if (IsInBounds(x, y + 1) && cells[x, y + 1].IsOpen == false)
+                            cellsToOpen.Add(new CellToOpen(cells[x, y + 1], x, y + 1));
+                        if (IsInBounds(x + 1, y) && cells[x + 1, y].IsOpen == false)
+                        cellsToOpen.Add(new CellToOpen(cells[x + 1, y], x + 1, y));
+                    }
+                    else
+                    {
+                        cells[x, y].Text = mines.ToString();
+                    }
                 }
                 else
                 {
-                    cells[x, y].Text = mines.ToString();
+                    //BOOM
+                    ShowMines();
                 }
+
+                //Re-Draw
+                if (selX == x && selY == y)
+                    cells[x, y].Draw(true);
+                else
+                    cells[x, y].Draw(false);
             }
-            else
+        }
+
+        private void OpenScheduledCells()
+        {
+            //Copy over list into a working list
+            List<CellToOpen> tmpList = cellsToOpen.ToList();
+            cellsToOpen.Clear(); //Clear list
+
+            foreach (CellToOpen cell in tmpList)
             {
-                //BOOM
-                ShowMines();
+                OpenCell(cell.TileX, cell.TileY);
             }
         }
 
@@ -88,21 +125,21 @@ namespace Minesweeper.GameBoard
         public int GetNumberOfMinesAround(int x, int y)
         {
             int mines = 0;
-            if (cells[x - 1, y - 1].IsMine == true)
+            if (IsInBounds(x - 1, y - 1) && cells[x - 1, y - 1].IsMine == true)
                 mines++;
-            if (cells[x, y - 1].IsMine == true)
+            if (IsInBounds(x, y - 1) && cells[x, y - 1].IsMine == true)
                 mines++;
-            if (cells[x + 1, y - 1].IsMine == true)
+            if (IsInBounds(x + 1, y - 1) && cells[x + 1, y - 1].IsMine == true)
                 mines++;
-            if (cells[x + 1, y].IsMine == true)
+            if (IsInBounds(x + 1, y) && cells[x + 1, y].IsMine == true)
                 mines++;
-            if (cells[x + 1, y + 1].IsMine == true)
+            if (IsInBounds(x + 1, y + 1) && cells[x + 1, y + 1].IsMine == true)
                 mines++;
-            if (cells[x, y + 1].IsMine == true)
+            if (IsInBounds(x, y + 1) && cells[x, y + 1].IsMine == true)
                 mines++;
-            if (cells[x - 1, y + 1].IsMine == true)
+            if (IsInBounds(x - 1, y + 1) && cells[x - 1, y + 1].IsMine == true)
                 mines++;
-            if (cells[x - 1, y].IsMine == true)
+            if (IsInBounds(x - 1, y - 1) && cells[x - 1, y].IsMine == true)
                 mines++;
             return mines;
         }
@@ -156,22 +193,78 @@ namespace Minesweeper.GameBoard
             }
         }
 
+        public bool IsInBounds(int x, int y)
+        {
+            if (x >= 0 && x < sizeX && y >= 0 && y < sizeY)
+                return true;
+            return false;
+        }
+
         /// <summary>Updates the board</summary>
         public void Update()
         {
-
+            OpenScheduledCells();
+            UpdatePlayerInput();
         }
 
         /// <summary>Checks if the player moved the selection area</summary>
         private void UpdatePlayerInput()
         {
+            if (Keyboard.IsKeyPressed(ConsoleKey.W))
+            {
+                if (selY - 1 >= 0)
+                    selY--;
 
+                //Re-Draw cells
+                cells[selX, selY + 1].Draw(false);
+                cells[selX, selY].Draw(true);
+            }
+            else if (Keyboard.IsKeyPressed(ConsoleKey.S))
+            {
+                if (selY + 1 < sizeY)
+                    selY++;
+
+                //Re-Draw cells
+                cells[selX, selY - 1].Draw(false);
+                cells[selX, selY].Draw(true);
+            }
+            else if (Keyboard.IsKeyPressed(ConsoleKey.A))
+            {
+                if (selX- 1 >= 0)
+                    selX--;
+
+                //Re-Draw cells
+                cells[selX + 1, selY].Draw(false);
+                cells[selX, selY].Draw(true);
+            }
+            else if (Keyboard.IsKeyPressed(ConsoleKey.D))
+            {
+                if (selX + 1 < sizeX)
+                    selX++;
+
+                //Re-Draw cells
+                cells[selX - 1, selY].Draw(false);
+                cells[selX, selY].Draw(true);
+            }
+            else if (Keyboard.IsKeyPressed(ConsoleKey.Enter))
+            {
+                OpenCell(selX, selY);
+            }
         }
 
         /// <summary>Draws the game board</summary>
         public void Draw()
         {
-
+            for (int x = 0; x < sizeX; x++)
+            {
+                for (int y = 0; y < sizeY; y++)
+                {
+                    if (selX == x && selY == y)
+                        cells[x, y].Draw(true);
+                    else
+                        cells[x, y].Draw();
+                }
+            }
         }
     }
 }

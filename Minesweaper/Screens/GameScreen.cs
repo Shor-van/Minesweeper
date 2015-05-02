@@ -22,7 +22,7 @@ namespace Minesweeper.Screens
         /// <param name="settings">A BoardSettings object spesifing the board settings</param>
         public void SetupGameBoard(BoardSettings settings)
         {
-            gameBoard = new Board(0, 0, settings);
+            gameBoard = new Board(0, 3, settings);
             penel = new InfoPenel((Program.ViewWidth() / 2) - (35 / 2), 0, 35, 3, ConsoleColor.White, ConsoleColor.DarkBlue);
         }
 
@@ -41,10 +41,12 @@ namespace Minesweeper.Screens
             if (Program.switchingScreen)
             {
                 penel.OneTimeDraw();
+                gameBoard.Draw();
             }
 
             Program.switchingScreen = false;
             penel.Update(gameBoard);
+            gameBoard.Update();
         }
 
         /// <summary>Draws the game board</summary>

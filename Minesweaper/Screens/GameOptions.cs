@@ -42,6 +42,8 @@ namespace Minesweeper.Screens
             options[2].Selected += new MenuText.BaseEventHandler(OnLargeSelected);
             options[3].Selected += new MenuText.BaseEventHandler(OnCustomSelected);
 
+            options[3].Enable = false;
+
             arrow = new Arrow(ConsoleColor.Yellow, 0, 0, false);
 
             selection = 0;
@@ -119,6 +121,17 @@ namespace Minesweeper.Screens
                     selection = options.Count - 1;
                 else
                     selection--;
+
+                //if not enabled
+                if (options[selection].Enable != true)
+                {
+                    if (selection == 0)
+                        selection = options.Count - 1;
+                    else if (selection == options.Count - 1)
+                        selection = 0;
+                    else
+                        selection--;
+                }
             }
             else if (Keyboard.IsKeyPressed(ConsoleKey.S))
             {
@@ -126,6 +139,17 @@ namespace Minesweeper.Screens
                     selection = 0;
                 else
                     selection++;
+
+                //if not enabled
+                if (options[selection].Enable != true)
+                {
+                    if (selection == 0)
+                        selection = options.Count - 1;
+                    else if (selection == options.Count - 1)
+                        selection = 0;
+                    else
+                        selection++;
+                }
             }
             else if (Keyboard.IsKeyPressed(ConsoleKey.Escape))
             {
