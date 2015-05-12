@@ -56,7 +56,7 @@ namespace Minesweeper.Screens.UI
         }
 
         /// <summary>Updates info penel, calculates time</summary>
-        public void Update(Board board)
+        public void Update(Board board, int min, int sec)
         {
             if (Program.sizeChanged)
             {
@@ -64,6 +64,22 @@ namespace Minesweeper.Screens.UI
             }
 
             mines.Text = "MINES:" + board.GetNumberOfMines();
+
+            //Time formating
+            string strMin = "00";
+            string strSec = "00";
+
+            if (min < 10)
+                strMin = "0" + min;
+            else if(min > 0)
+                strMin = min.ToString();
+
+            if (sec < 10)
+                strSec = "0" + sec;
+            else if(sec > 0)
+                strSec = sec.ToString();
+
+            time.Text = "TIME:" + strMin + ":" + strSec;
         }
 
         /// <summary>Draws items that are drawn once</summary>

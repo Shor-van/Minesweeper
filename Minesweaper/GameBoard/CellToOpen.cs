@@ -38,7 +38,7 @@ namespace Minesweeper.GameBoard
         }
         /// <summary>Checks if the cell is this cell</summary>
         /// <param name="cell">The cell to check</param>
-        /// <returns>True if the cell is this cell else false</returns>
+        /// <returns>True if the cell is this cell, else false</returns>
         public bool IsCell(Cell cell)
         {
             if (this.cell.Equals(cell))

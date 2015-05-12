@@ -46,10 +46,7 @@ namespace Minesweeper.GameBoard
         }
 
         //Loop
-        public void Update()
-        {
-
-        }
+        public void Update() { }
 
         /// <summary>Draws the cell</summary>
         public void Draw(bool selected = false)

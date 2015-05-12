@@ -13,7 +13,15 @@ namespace Minesweeper.Screens
         private InfoPanel panel; //Info panel showing amount of time passed, and number of mines to find
         private ControlPanel ctrlPanel; //Panel showing the controls
 
-        /// <summary>Initsalize the menu</summary>
+        private float elepsedTime; //The amount of time that has elepsed
+        private int second; //The amount of secconds that have passed
+        private int minute; //The amount of minutes that have passed
+
+        //Gest and sets
+        public int Seconds { get { return second; } }
+        public int Minutes { get { return minute; } }
+
+        /// <summary>Initsalize the screen</summary>
         public GameScreen()
         {
 
@@ -36,6 +44,26 @@ namespace Minesweeper.Screens
             return false;
         }
 
+        /// <summary>Calculates the amount of time passed</summary>
+        private void CalculateTime()
+        {
+            elepsedTime += Program.lastLoopTime;
+            if (elepsedTime >= 1000.0f)
+            {
+                second++;
+                if (second >= 60)
+                {
+                    minute++;
+
+                    if (second > 60)
+                        second = second - 60;
+                    else
+                        second = 0;
+                }
+                elepsedTime = 0f;
+            }
+        }
+
         /// <summary>Updates the game board</summary>
         public void Update()
         {
@@ -46,7 +74,8 @@ namespace Minesweeper.Screens
             }
 
             Program.switchingScreen = false;
-            panel.Update(gameBoard);
+            CalculateTime();
+            panel.Update(gameBoard, minute, second);
             gameBoard.Update();
         }
 

@@ -162,22 +162,20 @@ namespace Minesweeper.GameBoard
         public int GetNumberOfMinesAround(int x, int y)
         {
             int mines = 0;
-            if (IsInBounds(x - 1, y - 1) && cells[x - 1, y - 1].IsMine == true)
-                mines++;
-            if (IsInBounds(x, y - 1) && cells[x, y - 1].IsMine == true)
-                mines++;
-            if (IsInBounds(x + 1, y - 1) && cells[x + 1, y - 1].IsMine == true)
-                mines++;
-            if (IsInBounds(x + 1, y) && cells[x + 1, y].IsMine == true)
-                mines++;
-            if (IsInBounds(x + 1, y + 1) && cells[x + 1, y + 1].IsMine == true)
-                mines++;
-            if (IsInBounds(x, y + 1) && cells[x, y + 1].IsMine == true)
-                mines++;
-            if (IsInBounds(x - 1, y + 1) && cells[x - 1, y + 1].IsMine == true)
-                mines++;
-            if (IsInBounds(x - 1, y - 1) && cells[x - 1, y].IsMine == true)
-                mines++;
+            for (int i = x - 1; i <= x + 1; i++)
+            {
+                for (int j = y - 1; j <= y + 1; j++)
+                {
+                    if (IsInBounds(i, j) == true)
+                    {
+                        if (i == x && j == y)
+                            continue;
+
+                        if (cells[i, j].IsMine == true)
+                            mines++;
+                    }
+                }
+            }
             return mines;
         }
 
@@ -302,6 +300,11 @@ namespace Minesweeper.GameBoard
 
                     cells[selX, selY].Draw(true);
                 }
+            }
+
+            else if (Keyboard.IsKeyPressed(ConsoleKey.F3))
+            {
+                Program.SetUpNewGame(BoardSettings.GetPresetData(BoardSize.Large));
             }
         }
 
