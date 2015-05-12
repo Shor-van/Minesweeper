@@ -33,6 +33,8 @@ namespace Minesweeper.Screens
         {
             gameBoard = new Board(2, (Program.ViewHieght() / 2) - (settings.Height / 2), settings);
             panel = new InfoPanel((Program.ViewWidth() / 2) - (35 / 2), 0, 35, 3, ConsoleColor.White, ConsoleColor.DarkBlue);
+            minute = 0;
+            second = 0;
         }
 
         /// <summary>Checks if the game board has been setup</summary>
@@ -77,6 +79,11 @@ namespace Minesweeper.Screens
             CalculateTime();
             panel.Update(gameBoard, minute, second);
             gameBoard.Update();
+
+            if (gameBoard.IsClosedCellsMines() == true)
+            {
+                //Show game over screen -> winn game
+            }
         }
 
         /// <summary>Draws the game board</summary>

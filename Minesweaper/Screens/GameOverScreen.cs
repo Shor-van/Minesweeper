@@ -7,5 +7,6 @@ namespace Minesweeper.Screens
 {
     public class GameOverScreen
     {
+
     }
 }
