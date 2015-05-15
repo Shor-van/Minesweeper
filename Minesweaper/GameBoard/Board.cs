@@ -386,14 +386,9 @@ namespace Minesweeper.GameBoard
 
             //Debugin
             else if (Keyboard.IsKeyPressed(ConsoleKey.F3))
-            {
                 Program.SetUpNewGame(BoardSettings.GetPresetData(BoardSize.Large));
-            }           
             else if (Keyboard.IsKeyPressed(ConsoleKey.F4))
-            {
                 ShowMines();
-            }
-
         }
 
         /// <summary>Draws the game board</summary>

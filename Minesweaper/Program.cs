@@ -33,6 +33,7 @@ namespace Minesweeper
         public static Thread sound; //Sound Thread
         public static float lastLoopTime; //The time that the last game loop took to complete
         public static bool showDebug = false; //Weather or not to draw the debug screen
+        public static bool gameWon = false; //Weather the player won the game
         
         //GameTime
         public static Stopwatch gameTime;
@@ -41,6 +42,7 @@ namespace Minesweeper
         private static MenuScreen menuScreen;
         private static GameOptions gameOptionsScreen;
         private static GameScreen gameScreen;
+        private static GameOverScreen gameOverScreen;
 
         private static int viewWidth = 100, viewHeight = 34;
 
@@ -56,6 +58,7 @@ namespace Minesweeper
             menuScreen = new MenuScreen();
             gameOptionsScreen = new GameOptions();
             gameScreen = new GameScreen();
+            gameOverScreen = new GameOverScreen();
         }
 
         public static void ChangeWindowSize(int width, int height)
@@ -222,6 +225,14 @@ namespace Minesweeper
             gameScreen.SetupGameBoard(settings);
             gameState = GameState.GamePlayState;
             switchingScreen = true;            
+        }
+
+        /// <summary> Sets up the game over screen based on weather the player won the game</summary>
+        public static void SetupGameOverScreen()
+        {
+            gameOverScreen.SetupScreen();
+            gameState = GameState.GameOverState;
+            switchingScreen = true;
         }
 
         /// <summary>Generates a random number smaller the spessifed max but greater or equal to the spesifed min</summary>
