@@ -21,11 +21,13 @@ namespace Minesweeper.GameBoard
         private int posX, posY; //The top left location of the board on the screen
         private int selX, selY; //The x and y cell that the player is selecting
         private List<CellToOpen> cellsToOpen; //A list of cells to be open in the next loop
+        private bool mineTriggered = false; //Weather the player hit a mine
 
         //Gets and sets
         public Cell[,] Cells { get { return cells; } set { cells = value; } }
         public int PositionX { get { return posX; } set { posX = value; } }
         public int PositionY { get { return posY; } set { posY = value; } }
+        public bool MineTriggered { get { return mineTriggered; } }
 
         /// <summary>Main constructor</summary>
         /// <param name="posX">The top location on the screen at witch to draw the gameboard</param>
@@ -191,8 +193,8 @@ namespace Minesweeper.GameBoard
                 else
                 {
                     //BOOM
-                    //show mines whait some time then show game over screen
-                    ShowMines();
+                    mineTriggered = true;
+                    return;
                 }
 
                 //Re-Draw

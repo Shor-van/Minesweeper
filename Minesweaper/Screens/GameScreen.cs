@@ -9,6 +9,8 @@ namespace Minesweeper.Screens
 {
     public class GameScreen
     {
+        private int gameOverWaitTime = 500; //The amount of time the game should wait before changeing to the game over screen
+
         private Board gameBoard; //The gane board contains cells
         private InfoPanel panel; //Info panel showing amount of time passed, and number of mines to find
         private ControlPanel ctrlPanel; //Panel showing the controls
@@ -66,7 +68,7 @@ namespace Minesweeper.Screens
             }
         }
 
-        /// <summary>Updates the game board</summary>
+        /// <summary>Updates the game screen</summary>
         public void Update()
         {
             if (Program.switchingScreen)
@@ -76,17 +78,36 @@ namespace Minesweeper.Screens
             }
 
             Program.switchingScreen = false;
+            
             CalculateTime();
             panel.Update(gameBoard, minute, second);
             gameBoard.Update();
 
+            //if lost
+            if (gameBoard.MineTriggered == true)
+            {
+                gameBoard.ShowMines();
+                Program.gameWon = false;
+                Program.gameState = GameState.GameOverState;
+                Program.SetupGameOverScreen(minute, second);
+                System.Threading.Thread.Sleep(gameOverWaitTime);
+                return;
+            }
+
+            //if won
             if (gameBoard.IsClosedCellsMines() == true)
             {
                 //Show game over screen -> winn game
+                gameBoard.ShowMines();
+                Program.gameWon = true;
+                Program.gameState = GameState.GameOverState;
+                Program.SetupGameOverScreen(minute, second);
+                System.Threading.Thread.Sleep(gameOverWaitTime);
+                return;
             }
         }
 
-        /// <summary>Draws the game board</summary>
+        /// <summary>Draws the game screen</summary>
         public void Draw()
         {
             panel.Draw();

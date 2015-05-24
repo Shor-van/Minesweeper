@@ -102,6 +102,9 @@ namespace Minesweeper.GameBoard
                 Console.SetCursorPosition(posX + 1, posY);
                 Console.Write(text);
             }
+
+            Program.backgroundColor = ConsoleColor.Black;
+            Console.ResetColor();
         }
     }
 }

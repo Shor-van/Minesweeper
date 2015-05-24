@@ -168,7 +168,10 @@ namespace Minesweeper
             }
             else if (gameState == GameState.GameOverState)
             {
+                gameOverScreen.Update();
 
+                if (gameState != GameState.GameOverState)
+                    switchingScreen = true;
             }
             else if (gameState == GameState.ScoreState)
             {
@@ -202,7 +205,7 @@ namespace Minesweeper
                 }
                 else if (gameState == GameState.GameOverState)
                 {
-
+                    gameOverScreen.Draw();
                 }
                 else if (gameState == GameState.ScoreState)
                 {
@@ -228,9 +231,11 @@ namespace Minesweeper
         }
 
         /// <summary> Sets up the game over screen based on weather the player won the game</summary>
-        public static void SetupGameOverScreen()
+        /// <param name="mins">The minutes that the game took</param>
+        /// <param name="secs">The seconds that the game took</param>
+        public static void SetupGameOverScreen(int mins, int secs)
         {
-            gameOverScreen.SetupScreen();
+            gameOverScreen.SetupScreen(mins, secs);
             gameState = GameState.GameOverState;
             switchingScreen = true;
         }
