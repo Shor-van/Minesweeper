@@ -9,7 +9,7 @@ namespace Minesweeper.Screens
 {
     public class GameScreen
     {
-        private int gameOverWaitTime = 500; //The amount of time the game should wait before changeing to the game over screen
+        private int gameOverWaitTime = 1000; //The amount of time the game should wait before changeing to the game over screen in ms
 
         private Board gameBoard; //The gane board contains cells
         private InfoPanel panel; //Info panel showing amount of time passed, and number of mines to find

@@ -74,7 +74,6 @@
     <Compile Include="Screens\UI\Arrow.cs" />
     <Compile Include="Screens\UI\ControlPanel.cs" />
     <Compile Include="Screens\UI\InfoPanel.cs" />
-    <Compile Include="Screens\UI\Panel.cs" />
     <Compile Include="Screens\UI\SplashText.cs" />
     <Compile Include="Screens\UI\TextLabel.cs" />
     <Compile Include="Sound\SoundManager.cs" />

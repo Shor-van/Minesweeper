@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Minesweeper.Screens.UI;
+using Minesweeper.Utils;
 
 namespace Minesweeper.Screens
 {
@@ -40,12 +41,14 @@ namespace Minesweeper.Screens
             else if (secs > 0)
                 strSec = secs.ToString();
 
-            time = new TextLabel("Your time was:" + strMin + ":" + strSec, 0, 0, ConsoleColor.White);
+            time = new TextLabel("Your time was:" + strMin + ":" + strSec, 0, 0, ConsoleColor.Yellow);
 
             if (Program.gameWon == true)
                 winLose = new TitleText("YOU WIN", ConsoleColor.Green, 0, 0);
             else
                 winLose = new TitleText("YOU LOSE", ConsoleColor.Red, 0, 0);
+
+            lblCont = new TextLabel("Press any key to continue!", 0, 0, ConsoleColor.Cyan);
 
             RecalculatePositions();
         }
@@ -64,6 +67,9 @@ namespace Minesweeper.Screens
             //Time
             time.PositionX = (Program.ViewWidth() / 2) - (time.MeasureSize()[0] / 2);
             time.PositionY = (winLose.PositionY + winLose.MeasureSize()[1]) + 2;
+
+            lblCont.PositionX = (Program.ViewWidth() / 2) - (lblCont.MeasureSize()[0] / 2);
+            lblCont.PositionY = (Program.ViewHieght() - 5);
         }
 
         /// <summary>This is called when the game changes screen</summary>
@@ -72,6 +78,7 @@ namespace Minesweeper.Screens
             title.Draw();
             winLose.Draw();
             time.Draw();
+            lblCont.Draw();
         }
 
         /// <summary>Updates the screen</summary>
@@ -82,7 +89,13 @@ namespace Minesweeper.Screens
                 DrawOnce();
             }
 
-            Program.switchingScreen = false;            
+            Program.switchingScreen = false;
+
+            if (Keyboard.IsAnyKeyPressed())
+            {
+                Program.gameState = GameState.MenuState;
+                return;
+            }
         }
 
         /// <summary>Draws the objcets thet should be drawn every</summary>

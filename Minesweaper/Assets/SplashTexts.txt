@@ -9,8 +9,8 @@ I win lel!
 NyanNyanNyanNyanNyan!
 Teehee!
 X + Y + Z = XYZ!
-new SplashText();
-Tick();
+new SplashText();!
+Tick();!
 ASCI based graphics!
 They see me trollin!
 Boop!
@@ -22,10 +22,10 @@ The force is weak with this one!
 Dolphin free!
 *** is ****** so I say *** whould be *******!
 ******* ************* ****** ***!
-if(****** == ****) then **** = ********;
-</3
+if(****** == ****) then **** = ********;!
+</3!
 Who, who who whoooooooo!
-The game is on
+The game is on!
 8246824682468246824682468246!
 Have a gold star!
 Round and round!
@@ -33,3 +33,25 @@ Fancy splash text **********!
 Less then 3!
 Less then or equal 3!
 Enter cheat code!
+Karambit Fade!
+>>------->!
+>> >>!
+GenerateNewSplashText();!
+Adventure Time!
+Game of Throwns!
+MLGUHHHHHHH!
+hahahahahahahahahhahahah!
+1 + 1 = 2/10/11/3!
+One is lit. One is lit. One is lit. One is lit!
+You can hold scout with a banana!
+Splash generation of re-potion!
+Don't let your bananas go up stream!
+Ninja defuse!
+Here is There!
+There. Right There!
+Mighty PissAss!
+PAIN!
+I miss you, <3 Pango!
+Go, gogogogogogogogogogogo!
+Global Elite coding!
+OLDDDDD MAANNNN WILLAAAKERRRRRSSSSSSSS!
