@@ -46,6 +46,7 @@ namespace Minesweeper.Screens.UI
             RecalculatePositions();
         }
 
+        /// <summary>Recalculates the position of all the UI items</summary>
         public void RecalculatePositions()
         {
             time.PositionX = (posX + ((width / 2) - time.MeasureSize()[0] - 3));

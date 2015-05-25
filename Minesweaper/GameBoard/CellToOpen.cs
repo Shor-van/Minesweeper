@@ -36,6 +36,7 @@ namespace Minesweeper.GameBoard
                 return true;
             return false;
         }
+
         /// <summary>Checks if the cell is this cell</summary>
         /// <param name="cell">The cell to check</param>
         /// <returns>True if the cell is this cell, else false</returns>

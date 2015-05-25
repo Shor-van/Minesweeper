@@ -44,6 +44,7 @@ namespace Minesweeper
         private static GameOptions gameOptionsScreen;
         private static GameScreen gameScreen;
         private static GameOverScreen gameOverScreen;
+        private static HelpScreen helpScreen;
 
         private static int viewWidth = 100, viewHeight = 34; //The width and height of the game window
 
@@ -51,7 +52,7 @@ namespace Minesweeper
         private static void Initalize()
         {
             Console.SetWindowSize(viewWidth, viewHeight);
-            Console.Title = "Minesweeper V0.71";
+            Console.Title = "Minesweeper V0.75";
             Console.CursorVisible = false;
             Console.BufferWidth = viewWidth;
             Console.BufferHeight = viewHeight;
@@ -61,6 +62,7 @@ namespace Minesweeper
             gameOptionsScreen = new GameOptions();
             gameScreen = new GameScreen();
             gameOverScreen = new GameOverScreen();
+            helpScreen = new HelpScreen();
         }
 
         /// <summary>Changes the size of the window sisze</summary>
@@ -168,7 +170,10 @@ namespace Minesweeper
             }
             else if(gameState == GameState.HelpState)
             {
+                helpScreen.Update();
 
+                if (gameState != GameState.HelpState)
+                    switchingScreen = true;
             }
             else if (gameState == GameState.GamePlayState)
             {
@@ -212,7 +217,7 @@ namespace Minesweeper
                 }
                 else if(gameState == GameState.HelpState)
                 {
-
+                    helpScreen.Draw();
                 }
                 else if (gameState == GameState.GamePlayState)
                 {

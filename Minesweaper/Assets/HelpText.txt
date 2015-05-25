@@ -1,0 +1,14 @@
+﻿Controls
+
+Move selection up with: W
+Move selection down with: S
+Move selection left with: A
+Move selection right with: D
+
+Open a cell with: Enter
+Mark or unmark a cell with: E cycle between F or ?
+
+Gameplay
+
+The goal of the game is to open all the cells that don't contain mines without triggering any of the
+mines in the shortest time possible. 

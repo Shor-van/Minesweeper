@@ -17,7 +17,7 @@ Mabye open cell should have diff background color?
 |_| = Closed cell
 | | = Empty open cell
 |M| = Mine cell
-|0| = Number cell
+|1| = Number cell
 |F| = Flag Cell
 |?| = question cell
 

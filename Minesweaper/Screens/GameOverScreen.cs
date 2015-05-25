@@ -15,10 +15,7 @@ namespace Minesweeper.Screens
         private TextLabel lblCont; //Lable that says to press enter to continue
 
         /// <summary>Inisalize the screen</summary>
-        public GameOverScreen()
-        {
-            
-        }
+        public GameOverScreen() { }
 
         /// <summary>Setsup the screen based on weathre them player won the round</summary>
         /// <param name="mins">The minutes that the game took</param>

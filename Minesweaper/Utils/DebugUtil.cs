@@ -20,7 +20,7 @@ namespace Minesweeper.Utils
             elepsedTime += (float)Program.lastLoopTime;
             if (elepsedTime >= 1000.0f)
             {
-                lblFps.Text = "FPS:" + totalFrames;
+                lblFps.Text = "FPS:" + totalFrames + "  ";
                 totalFrames = 0;
                 elepsedTime = 0;
             }
