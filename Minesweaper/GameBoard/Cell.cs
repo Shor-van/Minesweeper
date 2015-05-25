@@ -39,7 +39,7 @@ namespace Minesweeper.GameBoard
             this.text = "_";
         }
 
-        /// <summary>Oppens this cell, if no mine is near connected cells are opened</summary>
+        /// <summary>Opens this cell, if no mine is near connected cells are opened</summary>
         public void OpenCell()
         {
 

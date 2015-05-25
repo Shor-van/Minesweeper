@@ -33,7 +33,7 @@ namespace Minesweeper.Screens
         /// <param name="settings">A BoardSettings object spesifing the board settings</param>
         public void SetupGameBoard(BoardSettings settings)
         {
-            gameBoard = new Board(2, (Program.ViewHieght() / 2) - (settings.Height / 2), settings);
+            gameBoard = new Board((Program.ViewWidth() / 2) -  ((settings.Width * 3) / 2), (Program.ViewHieght() / 2) - (settings.Height / 2), settings);
             panel = new InfoPanel((Program.ViewWidth() / 2) - (35 / 2), 0, 35, 3, ConsoleColor.White, ConsoleColor.DarkBlue);
             minute = 0;
             second = 0;

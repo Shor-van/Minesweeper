@@ -24,6 +24,7 @@ namespace Minesweeper
 
     class Program
     {
+        //Game settings
         public static bool isExiting = false; //Weather the game is exiting
         public static bool switchingScreen = false; //Weather the screen is changing
         public static ConsoleColor backgroundColor = ConsoleColor.Black; //The current background color
@@ -44,8 +45,9 @@ namespace Minesweeper
         private static GameScreen gameScreen;
         private static GameOverScreen gameOverScreen;
 
-        private static int viewWidth = 100, viewHeight = 34;
+        private static int viewWidth = 100, viewHeight = 34; //The width and height of the game window
 
+        /// <summary>Initalizes the game, setsup the screens</summary>
         private static void Initalize()
         {
             Console.SetWindowSize(viewWidth, viewHeight);
@@ -61,6 +63,9 @@ namespace Minesweeper
             gameOverScreen = new GameOverScreen();
         }
 
+        /// <summary>Changes the size of the window sisze</summary>
+        /// <param name="width">The width of the window in tiles</param>
+        /// <param name="height">The height of the window in tiles</param>
         public static void ChangeWindowSize(int width, int height)
         {
             viewWidth = width;
@@ -76,6 +81,8 @@ namespace Minesweeper
         public static int ViewWidth() { return viewWidth; }
         public static int ViewHieght() { return viewHeight; }
 
+        /// <summary>The main entry point of the game</summary>
+        /// <param name="args">Starting args do nothing</param>
         static void Main(string[] args)
         {
             try
@@ -159,6 +166,10 @@ namespace Minesweeper
                 if (gameState != GameState.GameOptionState)
                     switchingScreen = true;
             }
+            else if(gameState == GameState.HelpState)
+            {
+
+            }
             else if (gameState == GameState.GamePlayState)
             {
                 gameScreen.Update();
@@ -198,6 +209,10 @@ namespace Minesweeper
                 else if (gameState == GameState.GameOptionState)
                 {
                     gameOptionsScreen.Draw();
+                }
+                else if(gameState == GameState.HelpState)
+                {
+
                 }
                 else if (gameState == GameState.GamePlayState)
                 {
