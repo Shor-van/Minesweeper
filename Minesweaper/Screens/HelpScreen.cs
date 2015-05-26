@@ -178,6 +178,17 @@ namespace Minesweeper.Screens
                 return;
             }
 
+            //Enable disable
+            if (currentPage > 0)
+                options[0].Enable = true;
+            else
+                options[0].Enable = false;
+
+            if (currentPage < pages.Count - 1)
+                options[1].Enable = true;
+            else
+                options[1].Enable = false;
+
             //Update core menu
             for (int i = 0; i < options.Length; i++)
             {
