@@ -12,15 +12,26 @@ namespace Minesweeper.Screens
     public class HelpScreen
     {
         private TitleText title; //The title "Help Screen"
-        private List<List<MultiColoredTextLabel>> textList; //A list containing all the text labels
+        private List<List<MultiColoredTextLabel>> pages; //A list containing all the pages, ATM pages are just lists of MultiColoredTextLabels
         private int currentPage; //The current page to show
         private bool switchingPage; //Weather the screen is changeing page
+        private int menuSel; //The selected option between next page and prev page (1,0)
+        private MenuText[] options; //The Next Page and prev page options
 
         /// <summary>Base constructor, loads the text from the list and builds the screen</summary>
         public HelpScreen()
         {
             title = new TitleText("HOW TO PLAY", ConsoleColor.Red, 0, 0);
-            textList = new List<List<MultiColoredTextLabel>>();
+            pages = new List<List<MultiColoredTextLabel>>();
+            options = new MenuText[2];
+            menuSel = 0;
+
+            options[0] = new MenuText("<-Prev Page", 0, 0);
+            options[1] = new MenuText("Next Page->", 0, 0);
+
+            //Register Events
+            options[0].Selected += new MenuText.BaseEventHandler(OnPrevPageSelected);
+            options[1].Selected += new MenuText.BaseEventHandler(OnNextPageSelected);
 
             CreateTextLines(0, 8);
             currentPage = 0;
@@ -51,7 +62,7 @@ namespace Minesweeper.Screens
                     tmpStrs.Add(reader.ReadLine());
                 reader.Close();
 
-                textList.Add(new List<MultiColoredTextLabel>());
+                pages.Add(new List<MultiColoredTextLabel>());
                 int pge = 0;
 
                 //Check if any texts where loaded
@@ -64,13 +75,13 @@ namespace Minesweeper.Screens
                         {
                             if (line.Trim() != "&pge;")
                             {
-                                textList[pge].Add(new MultiColoredTextLabel(line, 0, y, ConsoleColor.White));
+                                pages[pge].Add(new MultiColoredTextLabel(line, 0, y, ConsoleColor.White));
                                 y++;
                             }
                             else
                             {
                                 pge++;
-                                textList.Add(new List<MultiColoredTextLabel>());
+                                pages.Add(new List<MultiColoredTextLabel>());
                                 y = sy;
                             }
                         }
@@ -81,8 +92,8 @@ namespace Minesweeper.Screens
                 else
                 {
                     //ERROR
-                    textList[0].Add(new MultiColoredTextLabel("  &2ERROR:HelpText.txt dose not contain any text!!!!", x, y, ConsoleColor.White));
-                    textList[0].Add(new MultiColoredTextLabel("  &2ERROR:Check the helpText.txt file for info.", x, y+1, ConsoleColor.White));
+                    pages[0].Add(new MultiColoredTextLabel("  &2ERROR:HelpText.txt dose not contain any text!!!!", x, y, ConsoleColor.White));
+                    pages[0].Add(new MultiColoredTextLabel("  &2ERROR:Check the helpText.txt file for info.", x, y+1, ConsoleColor.White));
                 }
             }
             catch (Exception e)
@@ -97,17 +108,43 @@ namespace Minesweeper.Screens
             }
         }
 
+        /// <summary>Recalculates all the positions for the UI objects</summary>
         public void RecalculatePositions()
         {
             title.PositionX = (Program.ViewWidth() / 2) - (title.MeasureSize()[0] / 2);
             title.PositionY = 2;
+
+            options[0].PositionX = 5;
+            options[0].PositionY = (Program.ViewHieght() - 2);
+
+            options[1].PositionX = (Program.ViewWidth() - (options[1].MeasureSize()[0])) - 5;
+            options[1].PositionY = (Program.ViewHieght() - 2);
         }
 
+        //Event Handlers
+        private void OnPrevPageSelected(object sender, EventArgs e)
+        {
+            currentPage--;
+            switchingPage = true;
+        }
+        private void OnNextPageSelected(object sender, EventArgs e)
+        {
+            currentPage++;
+            switchingPage = true;
+        }
+
+        //Loop
         /// <summary>Updates the help screen</summary>
         public void Update()
         {
             if(switchingPage == true)
                 Console.Clear();
+
+            if (Program.switchingScreen == true)
+            {
+                menuSel = 1;
+                currentPage = 0;
+            }
 
             if (Program.switchingScreen == true || switchingPage == true)
             {
@@ -118,34 +155,57 @@ namespace Minesweeper.Screens
             Program.switchingScreen = false;
             switchingPage = false;
 
-            if (Keyboard.IsKeyPressed(ConsoleKey.D2))
+            //Page switching
+            if (Keyboard.IsKeyPressed(ConsoleKey.A))
             {
-                currentPage = 1;
-                switchingPage = true;
+                if (menuSel <= 0)
+                    menuSel = 0;
+                else
+                    menuSel--;
             }
-            else if (Keyboard.IsKeyPressed(ConsoleKey.D1))
+            else if (Keyboard.IsKeyPressed(ConsoleKey.D))
             {
-                currentPage = 0;
-                switchingPage = true;
+                if (menuSel >= 1)
+                    menuSel = 1;
+                else
+                    menuSel++;
             }
 
+            //Back to menu
+            else if (Keyboard.IsKeyPressed(ConsoleKey.Escape))
+            {
+                Program.gameState = GameState.MenuState;
+                return;
+            }
+
+            //Update core menu
+            for (int i = 0; i < options.Length; i++)
+            {
+                if (i == menuSel)
+                    options[menuSel].Active = true;
+                else
+                    options[i].Active = false;
+
+                options[i].Update();
+            }
         }
 
-        /// <summary>Should only be called once</summary>
+        /// <summary>Draws objects that should only be drawn once. Should only be called once</summary>
         public void DrawOnce()
         {
             //Title
             title.Draw();
 
             //Draw the lines
-            foreach (MultiColoredTextLabel line in textList[currentPage])
+            foreach (MultiColoredTextLabel line in pages[currentPage])
                 line.Draw();
         }
 
-        /// <summary>Draws the screen</summary>
+        /// <summary>Draws the screen, this is called every loop</summary>
         public void Draw()
         {
-
+            for (int i = 0; i < options.Length; i++)
+                options[i].Draw();
         }
     }
 }
