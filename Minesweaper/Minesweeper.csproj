@@ -71,6 +71,7 @@
     <Compile Include="Screens\GameScreen.cs" />
     <Compile Include="Screens\HelpScreen.cs" />
     <Compile Include="Screens\HighscoreScreen.cs" />
+    <Compile Include="Screens\IntoScreen.cs" />
     <Compile Include="Screens\UI\Arrow.cs" />
     <Compile Include="Screens\UI\ControlPanel.cs" />
     <Compile Include="Screens\UI\InfoPanel.cs" />
