@@ -8,7 +8,36 @@ Move selection right with: D
 Open a cell with: Enter
 Mark or unmark a cell with: E cycle between F or ?
 
-Gameplay
+Goal of the game
 
 The goal of the game is to open all the cells that don't contain mines without triggering any of the
 mines in the shortest time possible. 
+
+Display
+
+|_| = Closed cell
+| | = Empty open cell
+|M| = Mine cell
+|1| = Number cell
+|F| = Flag Cell
+|?| = question cell
+&pge;
+Gameplay
+
+You open a cell by selecting it and pressing enter when the cell is opened it will check the number 
+of cells with mines around the cell like so.
+
+X is the selected cell.
+
+|_||_||_|
+|_||X||_|
+|_||_||_|
+
+X will be the number of cells around that are mines Ex.
+
+|_||M||_|
+|_||2||_|
+|M||_||_|
+
+If there are no mines around the selected cell no number will be shown and the 4 cells that are 
+connected are open as well.

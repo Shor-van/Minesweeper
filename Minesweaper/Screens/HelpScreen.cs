@@ -12,15 +12,19 @@ namespace Minesweeper.Screens
     public class HelpScreen
     {
         private TitleText title; //The title "Help Screen"
-        private List<MultiColoredTextLabel> textList; //A list containing all the text labels
+        private List<List<MultiColoredTextLabel>> textList; //A list containing all the text labels
+        private int currentPage; //The current page to show
+        private bool switchingPage; //Weather the screen is changeing page
 
         /// <summary>Base constructor, loads the text from the list and builds the screen</summary>
         public HelpScreen()
         {
             title = new TitleText("HOW TO PLAY", ConsoleColor.Red, 0, 0);
-            textList = new List<MultiColoredTextLabel>();
+            textList = new List<List<MultiColoredTextLabel>>();
 
             CreateTextLines(0, 8);
+            currentPage = 0;
+            switchingPage = false;
 
             RecalculatePositions();
         }
@@ -31,6 +35,7 @@ namespace Minesweeper.Screens
         private void CreateTextLines(int x, int y)
         {
             //Create text labels from text file
+            int sy = y;
             try
             {
                 Assembly assembly;
@@ -46,6 +51,9 @@ namespace Minesweeper.Screens
                     tmpStrs.Add(reader.ReadLine());
                 reader.Close();
 
+                textList.Add(new List<MultiColoredTextLabel>());
+                int pge = 0;
+
                 //Check if any texts where loaded
                 if (tmpStrs.Count > 0)
                 {
@@ -54,8 +62,17 @@ namespace Minesweeper.Screens
                     {
                         if (line != String.Empty)
                         {
-                            textList.Add(new MultiColoredTextLabel(line, 0, y, ConsoleColor.White));
-                            y++;
+                            if (line.Trim() != "&pge;")
+                            {
+                                textList[pge].Add(new MultiColoredTextLabel(line, 0, y, ConsoleColor.White));
+                                y++;
+                            }
+                            else
+                            {
+                                pge++;
+                                textList.Add(new List<MultiColoredTextLabel>());
+                                y = sy;
+                            }
                         }
                         else
                             y++;
@@ -64,8 +81,8 @@ namespace Minesweeper.Screens
                 else
                 {
                     //ERROR
-                    textList.Add(new MultiColoredTextLabel("  &2ERROR:HelpText.txt dose not contain any text!!!!", x, y, ConsoleColor.White));
-                    textList.Add(new MultiColoredTextLabel("  &2ERROR:Check the helpText.txt file for info.", x, y+1, ConsoleColor.White));
+                    textList[0].Add(new MultiColoredTextLabel("  &2ERROR:HelpText.txt dose not contain any text!!!!", x, y, ConsoleColor.White));
+                    textList[0].Add(new MultiColoredTextLabel("  &2ERROR:Check the helpText.txt file for info.", x, y+1, ConsoleColor.White));
                 }
             }
             catch (Exception e)
@@ -89,13 +106,29 @@ namespace Minesweeper.Screens
         /// <summary>Updates the help screen</summary>
         public void Update()
         {
-            if (Program.switchingScreen == true)
+            if(switchingPage == true)
+                Console.Clear();
+
+            if (Program.switchingScreen == true || switchingPage == true)
             {
                 RecalculatePositions();
                 DrawOnce();
             }
 
             Program.switchingScreen = false;
+            switchingPage = false;
+
+            if (Keyboard.IsKeyPressed(ConsoleKey.D2))
+            {
+                currentPage = 1;
+                switchingPage = true;
+            }
+            else if (Keyboard.IsKeyPressed(ConsoleKey.D1))
+            {
+                currentPage = 0;
+                switchingPage = true;
+            }
+
         }
 
         /// <summary>Should only be called once</summary>
@@ -105,7 +138,7 @@ namespace Minesweeper.Screens
             title.Draw();
 
             //Draw the lines
-            foreach (MultiColoredTextLabel line in textList)
+            foreach (MultiColoredTextLabel line in textList[currentPage])
                 line.Draw();
         }
 
