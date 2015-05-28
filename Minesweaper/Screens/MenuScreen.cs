@@ -130,8 +130,6 @@ namespace Minesweeper.Screens
                 else
                     selection++;
             }
-            else if (Keyboard.IsKeyPressed(ConsoleKey.F1))
-                Program.switchingScreen = true;
 
             //Update core menu
             for (int i = 0; i < options.Count; i++)

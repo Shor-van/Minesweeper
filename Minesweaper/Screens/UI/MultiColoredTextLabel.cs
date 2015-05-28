@@ -58,7 +58,26 @@ namespace Minesweeper.Screens.UI
         /// <returns>A array that contains how much tile space the string takes in the window (0) width (1)height</returns>
         public int[] MeasureSize()
         {
-            return new int[] { text.Length, 1 };
+            int visableLenght = 0;
+            char[] letters = text.ToArray<char>();
+            for (int i = 0; i < letters.Length; i++)
+            {
+                //Check if is color code
+                if (letters[i] == '&' && i + 1 < letters.Length)
+                {
+                    //Attempt Get color code
+                    ConsoleColor? isColorCode = GetColorFromCode(letters[i].ToString() + letters[i + 1].ToString());
+
+                    //if is color code or reset code skip
+                    if (isColorCode != null || letters[i + 1] == 'r')
+                        i++;
+                    else //Just add char to visablelenght
+                        visableLenght++;
+                }
+                else //Just add char to visablelenght
+                    visableLenght++;
+            }
+            return new int[] { visableLenght, 1 };
         }
 
         /// <summary>Does nothing</summary>

@@ -314,13 +314,6 @@ namespace Minesweeper.GameBoard
         {
             OpenScheduledCells();
             UpdatePlayerInput();
-
-            Console.SetCursorPosition(0, Program.ViewHieght() - 1);
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.BackgroundColor = ConsoleColor.Black;
-            Console.Write("Only mines left:");
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write(IsClosedCellsMines().ToString() + "   ");  
         }
 
         /// <summary>Checks if the player moved the selection area</summary>
@@ -385,12 +378,6 @@ namespace Minesweeper.GameBoard
                     cells[selX, selY].Draw(true);
                 }
             }
-
-            //Debugin
-            else if (Keyboard.IsKeyPressed(ConsoleKey.F3))
-                Program.SetUpNewGame(BoardSettings.GetPresetData(BoardSize.Huge));
-            else if (Keyboard.IsKeyPressed(ConsoleKey.F4))
-                ShowMines();
         }
 
         /// <summary>Draws the game board</summary>

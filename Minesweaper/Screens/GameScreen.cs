@@ -23,6 +23,7 @@ namespace Minesweeper.Screens
         //Gest and sets
         public int Seconds { get { return second; } }
         public int Minutes { get { return minute; } }
+        public Board GameBoard { get { return gameBoard; } }
 
         /// <summary>Initsalize the screen</summary>
         public GameScreen()

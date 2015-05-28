@@ -141,14 +141,6 @@ namespace Minesweeper
                 Keyboard.Update();
             }
 
-            if (Keyboard.IsKeyPressed(ConsoleKey.F2))
-            {
-                if (showDebug)
-                    showDebug = false;
-                else
-                    showDebug = true;
-            }
-
             //Update game objects
             if (gameState == GameState.IntroState)
             {
@@ -193,7 +185,27 @@ namespace Minesweeper
             {
 
             }
-            
+
+            //Debug keys
+            if (Keyboard.IsKeyPressed(ConsoleKey.F12))
+            {
+                if (showDebug)
+                    showDebug = false;
+                else
+                    showDebug = true;
+
+                switchingScreen = true;
+            }
+
+            if (showDebug)
+            {
+                if (Keyboard.IsKeyPressed(ConsoleKey.F1))
+                    switchingScreen = true;
+                else if (Keyboard.IsKeyPressed(ConsoleKey.F2))
+                    SetUpNewGame(BoardSettings.GetPresetData(BoardSize.Huge));
+                else if (Keyboard.IsKeyPressed(ConsoleKey.F3))
+                    gameScreen.GameBoard.ShowMines();
+            }
         }
 
         /// <summary>The Draw stage of the loop,  only the current screen is drawn witch is determined by the GameState</summary>
@@ -232,8 +244,24 @@ namespace Minesweeper
 
                 }
 
-                if(showDebug)
+                if (showDebug)
+                {
                     DebugUtil.Draw();
+
+                    //Only Mines
+                    if (gameScreen.GameBoard != null)
+                    {
+                        if (gameState == GameState.GamePlayState)
+                        {
+                            Console.SetCursorPosition(0, 2);
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            Console.BackgroundColor = ConsoleColor.Black;
+                            Console.Write("Only mines left:");
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.Write(gameScreen.GameBoard.IsClosedCellsMines().ToString() + "   ");
+                        }
+                    }
+                }
             }
             else
             {
