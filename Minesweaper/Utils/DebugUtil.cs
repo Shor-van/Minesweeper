@@ -9,7 +9,7 @@ namespace Minesweeper.Utils
     public static class DebugUtil
     {
         private static TextLabel time = new TextLabel("0000000", 0, 0, ConsoleColor.Cyan); //Test
-        private static TextLabel lblFps = new TextLabel("FPS", 0, 1, ConsoleColor.DarkCyan);
+        private static TextLabel lblFps = new TextLabel("FPS", 0, 1, ConsoleColor.Cyan);
 
         private static float elepsedTime;
         private static int fps;
@@ -20,7 +20,7 @@ namespace Minesweeper.Utils
             elepsedTime += (float)Program.lastLoopTime;
             if (elepsedTime >= 1000.0f)
             {
-                lblFps.Text = "FPS:" + totalFrames + " KP:" + Keyboard.GetPressedKey() + "          ";
+                lblFps.Text = "FPS:" + totalFrames + "  ";
                 totalFrames = 0;
                 elepsedTime = 0;
             }

@@ -120,6 +120,7 @@ namespace Minesweeper
                 //Reset
                 Keyboard.Clear();
                 sizeChanged = false;
+                System.Threading.Thread.Sleep(0);
             }
             else
             {
@@ -205,8 +206,12 @@ namespace Minesweeper
                     switchingScreen = true;
                 else if (Keyboard.IsKeyPressed(ConsoleKey.F2))
                     SetUpNewGame(BoardSettings.GetPresetData(BoardSize.Huge));
-                else if (Keyboard.IsKeyPressed(ConsoleKey.F3))
+                else if (Keyboard.IsKeyPressed(ConsoleKey.F3) && gameState == GameState.GamePlayState)
                     gameScreen.GameBoard.ShowMines();
+                else if (Keyboard.IsKeyPressed(ConsoleKey.F4) && gameState == GameState.GamePlayState)
+                { 
+                    //Save
+                }
             }
         }
 
