@@ -46,13 +46,13 @@ namespace Minesweeper
         private static GameOverScreen gameOverScreen;
         private static HelpScreen helpScreen;
 
-        private static int viewWidth = 100, viewHeight = 34; //The width and height of the game window
+        private static int viewWidth = 105, viewHeight = 40; //The width and height of the game window
 
         /// <summary>Initalizes the game, setsup the screens</summary>
         private static void Initalize()
         {
             Console.SetWindowSize(viewWidth, viewHeight);
-            Console.Title = "Minesweeper V0.80";
+            Console.Title = "Minesweeper V0.81";
             Console.CursorVisible = false;
             Console.BufferWidth = viewWidth;
             Console.BufferHeight = viewHeight;

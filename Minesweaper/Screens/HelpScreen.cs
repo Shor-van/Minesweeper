@@ -159,16 +159,28 @@ namespace Minesweeper.Screens
             if (Keyboard.IsKeyPressed(ConsoleKey.A))
             {
                 if (menuSel <= 0)
-                    menuSel = 0;
+                {
+                    if (options[0].Enable)
+                        menuSel = 0;
+                }
                 else
-                    menuSel--;
+                {
+                    if(options[menuSel - 1].Enable)
+                        menuSel--;
+                }
             }
             else if (Keyboard.IsKeyPressed(ConsoleKey.D))
             {
                 if (menuSel >= 1)
-                    menuSel = 1;
+                {
+                    if (options[1].Enable)
+                        menuSel = 1;
+                }
                 else
-                    menuSel++;
+                {
+                    if (options[menuSel + 1].Enable)
+                        menuSel++;
+                }
             }
 
             //Back to menu
