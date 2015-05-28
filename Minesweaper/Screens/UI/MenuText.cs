@@ -86,7 +86,7 @@ namespace Minesweeper.Screens.UI
         /// <summary>Updates the MenuText</summary>
         public void Update()
         {
-            if (active && aColor == wColor)
+            if (active && enable && (aColor == wColor || aColor == ConsoleColor.DarkGray))
             {
                 aColor = sColor;
                 OnHoveredOn(EventArgs.Empty);

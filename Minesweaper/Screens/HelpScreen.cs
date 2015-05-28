@@ -194,12 +194,24 @@ namespace Minesweeper.Screens
             if (currentPage > 0)
                 options[0].Enable = true;
             else
+            {
                 options[0].Enable = false;
+
+                //If selected
+                if (menuSel <= 0)
+                    menuSel = 1;
+            }
 
             if (currentPage < pages.Count - 1)
                 options[1].Enable = true;
             else
+            {
                 options[1].Enable = false;
+
+                //If selected
+                if (menuSel <= 1)
+                    menuSel = 0;
+            }
 
             //Update core menu
             for (int i = 0; i < options.Length; i++)
