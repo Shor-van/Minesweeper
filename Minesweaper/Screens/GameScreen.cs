@@ -87,6 +87,7 @@ namespace Minesweeper.Screens
                 RecalculatePostions();
                 panel.OneTimeDraw();
                 gameBoard.Draw();
+                lblcont.Draw();
             }
 
             Program.switchingScreen = false;
@@ -123,7 +124,6 @@ namespace Minesweeper.Screens
         public void Draw()
         {
             panel.Draw();
-            lblcont.Draw();
         }
     }
 }
