@@ -14,6 +14,7 @@ namespace Minesweeper.Screens
         private Board gameBoard; //The gane board contains cells
         private InfoPanel panel; //Info panel showing amount of time passed, and number of mines to find
         private ControlPanel ctrlPanel; //Panel showing the controls
+        private MultiColoredTextLabel lblcont; //Text the shows how to move and play
 
         private float elepsedTime; //The amount of time that has elepsed
         private int second; //The amount of secconds that have passed
@@ -26,7 +27,7 @@ namespace Minesweeper.Screens
         /// <summary>Initsalize the screen</summary>
         public GameScreen()
         {
-
+            lblcont = new MultiColoredTextLabel("UP: &3W&r, Dowm: &3S&r, Left: &3A&r, Right: &3D&r       Mark: &3E&r, Open: &3Enter", 0, 0, ConsoleColor.Cyan);
         }
 
         /// <summary>Sets up the game board based on the board settings passed</summary>
@@ -37,6 +38,15 @@ namespace Minesweeper.Screens
             panel = new InfoPanel((Program.ViewWidth() / 2) - (35 / 2), 0, 35, 3, ConsoleColor.White, ConsoleColor.DarkBlue);
             minute = 0;
             second = 0;
+
+            RecalculatePostions();
+        }
+
+        /// <summary>Recalculates all the positions of the UI objects</summary>
+        public void RecalculatePostions()
+        {
+            lblcont.PositionX = (Program.ViewWidth() / 2) - (lblcont.MeasureSize()[0] / 2);
+            lblcont.PositionY = (Program.ViewHieght() - 1);
         }
 
         /// <summary>Checks if the game board has been setup</summary>
@@ -73,6 +83,7 @@ namespace Minesweeper.Screens
         {
             if (Program.switchingScreen)
             {
+                RecalculatePostions();
                 panel.OneTimeDraw();
                 gameBoard.Draw();
             }
@@ -111,6 +122,7 @@ namespace Minesweeper.Screens
         public void Draw()
         {
             panel.Draw();
+            lblcont.Draw();
         }
     }
 }
