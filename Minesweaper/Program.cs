@@ -132,7 +132,6 @@ namespace Minesweeper
         /// <summary>The Update stage of the loop, only the current screen is updated witch is determined by the GameState</summary>
         private static void Update()
         {
-            DebugUtil.Update();
 
             //Check keyboard inputs
             if (Console.KeyAvailable == true)
@@ -185,6 +184,9 @@ namespace Minesweeper
             {
 
             }
+
+            //Debug Update
+            DebugUtil.Update();
 
             //Debug keys
             if (Keyboard.IsKeyPressed(ConsoleKey.F12))

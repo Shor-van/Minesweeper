@@ -10,12 +10,18 @@ namespace Minesweeper.Utils
     {
         private static ConsoleKeyInfo currentKeyInfo; //The current key info
         private static ConsoleKeyInfo lastKeyInfo; //The last loops key info
+        private static bool ignoreInput = false; //Weather the keyboard will read key presses
 
         /// <summary>Updates the keyboard handler, Gets the current state of the keys</summary>
         public static void Update()
         {
-            lastKeyInfo = currentKeyInfo;
-            currentKeyInfo = Console.ReadKey(true);
+            if (ignoreInput == false)
+            {
+                lastKeyInfo = currentKeyInfo;
+                currentKeyInfo = Console.ReadKey(true);
+            }
+            else
+                Clear();
         }
 
         /// <summary>Checks if the spesified key is pressed</summary>
@@ -34,6 +40,14 @@ namespace Minesweeper.Utils
                 return true;
             return false;
         }
+
+        /// <summary>Gets the currently pressed key</summary>
+        /// <returns>The currently pressed key</returns>
+        public static ConsoleKey GetPressedKey() { return currentKeyInfo.Key; }
+
+        /// <summary>Sets if the keybaord should ignore key presses</summary>
+        /// <param name="value">True or false</param>
+        public static void SetIgnoreInput(bool value) { ignoreInput = value; }
 
         /// <summary>Removes all pressed keyys</summary>
         public static void Clear()
