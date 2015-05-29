@@ -17,11 +17,13 @@ namespace Minesweeper.Screens
         private bool switchingPage; //Weather the screen is changeing page
         private int menuSel; //The selected option between next page and prev page (1,0)
         private MenuText[] options; //The Next Page and prev page options
+        private TextLabel lblMenu; //Text saying that the player can press escape to go back to the menu
 
         /// <summary>Base constructor, loads the text from the list and builds the screen</summary>
         public HelpScreen()
         {
             title = new TitleText("HOW TO PLAY", ConsoleColor.Red, 0, 0);
+            lblMenu = new TextLabel("Press ESC to go back to the main menu.", 0, 0, ConsoleColor.Cyan);
             pages = new List<List<MultiColoredTextLabel>>();
             options = new MenuText[2];
             menuSel = 0;
@@ -113,6 +115,9 @@ namespace Minesweeper.Screens
         {
             title.PositionX = (Program.ViewWidth() / 2) - (title.MeasureSize()[0] / 2);
             title.PositionY = 2;
+
+            lblMenu.PositionX = (Program.ViewWidth() / 2) - (lblMenu.MeasureSize()[0] / 2);
+            lblMenu.PositionY = (Program.ViewHieght() - 2);
 
             options[0].PositionX = 5;
             options[0].PositionY = (Program.ViewHieght() - 2);
@@ -241,6 +246,8 @@ namespace Minesweeper.Screens
         {
             for (int i = 0; i < options.Length; i++)
                 options[i].Draw();
+
+            lblMenu.Draw();
         }
     }
 }

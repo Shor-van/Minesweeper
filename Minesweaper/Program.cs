@@ -26,9 +26,9 @@ namespace Minesweeper
     {
         //Game settings
         public static bool isExiting = false; //Weather the game is exiting
-        public static bool switchingScreen = false; //Weather the screen is changing
+        public static bool switchingScreen = true; //Weather the screen is changing
         public static ConsoleColor backgroundColor = ConsoleColor.Black; //The current background color
-        public static GameState gameState = GameState.MenuState; //The "state" of the game, used to see witch screen to draw
+        public static GameState gameState = GameState.IntroState; //The "state" of the game, used to see witch screen to draw
         public static bool sizeChanged = true; //Weather the window size has changed 
         public static Random rand = new Random(); //Random 
         public static Thread sound; //Sound Thread
@@ -40,6 +40,7 @@ namespace Minesweeper
         public static Stopwatch gameTime;
 
         //Screens
+        private static IntroScreen introScreen;
         private static MenuScreen menuScreen;
         private static GameOptions gameOptionsScreen;
         private static GameScreen gameScreen;
@@ -52,12 +53,13 @@ namespace Minesweeper
         private static void Initalize()
         {
             Console.SetWindowSize(viewWidth, viewHeight);
-            Console.Title = "Minesweeper V0.83";
+            Console.Title = "Minesweeper V0.84";
             Console.CursorVisible = false;
             Console.BufferWidth = viewWidth;
             Console.BufferHeight = viewHeight;
             gameTime = new Stopwatch();
 
+            introScreen = new IntroScreen();
             menuScreen = new MenuScreen();
             gameOptionsScreen = new GameOptions();
             gameScreen = new GameScreen();
@@ -144,7 +146,10 @@ namespace Minesweeper
             //Update game objects
             if (gameState == GameState.IntroState)
             {
+                introScreen.Update();
 
+                if (gameState != GameState.IntroState)
+                    switchingScreen = true;
             }
             else if (gameState == GameState.MenuState)
             {
@@ -224,7 +229,7 @@ namespace Minesweeper
                 //Draw game objects
                 if (gameState == GameState.IntroState)
                 {
-
+                    introScreen.Draw();
                 }
                 else if (gameState == GameState.MenuState)
                 {
