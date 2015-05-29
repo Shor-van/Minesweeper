@@ -28,20 +28,29 @@ More in the next page...
 &pge;
 Gameplay
 
-You open a cell by selecting it and pressing enter when the cell is opened it will check the number 
-of cells with mines around the cell like so.
+You open a cell by selecting it and pressing the enter key, when the cell is opened it will check the 
+number of cells with mines around the cell like so.
 
 X is the selected cell.
 
-|_||_||_|
-|_||X||_|
-|_||_||_|
+ |_||_||_|
+ |_||X||_|
+ |_||_||_|
 
-X will be the number of cells around that are mines Ex.
+X will be the number of cells around the opened cell are mines Ex.
 
-|_||M||_|
-|_||2||_|
-|M||_||_|
+ |_||M||_|
+ |_||2||_|
+ |M||_||_|
 
-If there are no mines around the selected cell no number will be shown and the 4 cells that are 
-connected are open as well.
+If there are no mines around the selected cell no number will be shown and the 4 cells that are connected 
+are opened autometicly as well. If a cell that contains a mine is opened all the mines explode and you 
+lose the game.
+
+You can flag(Mark) a cell that you think has a mine, this is mostly to help you narrow down where the
+mines are. You can cycle between a F mark or a ? mark, also marked cells can not be opened by the player
+this is so thet you dont open a cell that you think is a mine by mistake :P 
+
+ |?||1|| || || || |
+ | ||1||1||1|| || |
+ | ||1||F||1|| || |
