@@ -117,6 +117,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Assets\ShadowLogo.txt" />
     <EmbeddedResource Include="Assets\HelpText.txt" />
     <Content Include="Assets\Notes.txt" />
     <EmbeddedResource Include="Assets\SplashTexts.txt" />

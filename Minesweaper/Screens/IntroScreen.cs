@@ -11,12 +11,14 @@ namespace Minesweeper.Screens
     {
         private TitleText shadow; //The SHADOW GAMES TitleText
         private TitleText shorvan; //The Shor_van TitleText
+        private LogoAnimation shadowAnim; //The intro animation of the shadow logo
         
         /// <summary>Initsalize the intro</summary>
         public IntroScreen()
         {
             shadow = new TitleText("SHADOW GAMES", ConsoleColor.Black, 0, 0);
             shorvan = new TitleText("SHOR VAN", ConsoleColor.White, 0, 0);
+            shadowAnim = new LogoAnimation();
 
             RecalcualtePositions();
         }
@@ -56,7 +58,7 @@ namespace Minesweeper.Screens
         /// <summary>Draws the screen, is called every loop</summary>
         public void Draw()
         {
-
+            shadowAnim.RanderLogoAnim(13);
         }
     }
 }
