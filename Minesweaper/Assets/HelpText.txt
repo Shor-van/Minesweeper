@@ -1,56 +1,56 @@
-﻿Controls
+﻿&3Controls
 
-Move selection up with: W
-Move selection down with: S
-Move selection left with: A
-Move selection right with: D
+&6Move selection up with: &5W
+&6Move selection down with: &5S
+&6Move selection left with: &5A
+&6Move selection right with: &5D
 
-Open a cell with: Enter
-Mark or unmark a cell with: E cycle between F or ?
+&6Open a cell with: &5Enter
+&6Mark or unmark a cell with: &5E&6 cycle between &4F&6 or &7?&6
 
-Goal of the game
+&3Goal of the game
 
-The computer will generate a grid of tiles based on the settings called cells then it will randomly add 
-mines in some of the cells. The goal of the game is to open all the cells that don't contain mines 
-without triggering any of the mines in the shortest time possible. in easy mode You can also win by 
-having all the mines marked with flag (f), but you must have atleat opened one cell.
+&6The computer will generate a grid of tiles based on the settings called cells then it will randomly add 
+&6mines in some of the cells. The goal of the game is to open all the cells that don't contain mines 
+&6without triggering any of the mines in the shortest time possible. in easy mode You can also win by 
+&6having all the mines marked with flag (&4f&6), but you must have atleat opened one cell.
 
-Display
+&3Display
 
-|_| = Closed cell, press enter when selected to open.
-| | = Empty open cell, a cell that does not contain a mine or has a mine near it.
-|M| = Mine cell, a cell that contains a mine OH NO.
-|1| = Number cell, a cell that has a mine near it, then umber is how many mines are near.
-|F| = Flaged cell, a cell that the player has marked.
-|?| = question cell, a cell marked with a ? mark means that the player thinks that there is a mine.
+&6|_| &5= &6Closed cell, press enter when selected to open.
+&6| | &5= &6Empty open cell, a cell that does not contain a mine or has a mine near it.
+&6|&2M&6| &5= &6Mine cell, a cell that contains a mine OH NO.
+&6|&31&6| &5= &6Number cell, a cell that has a mine near it, then umber is how many mines are near.
+&6|&4F&6| &5= &6Flaged cell, a cell that the player has marked.
+&6|&7?&6| &5= &6question cell, a cell marked with a ? mark means that the player thinks that there is a mine.
 
-More in the next page...
+&3More in the next page...
 &pge;
-Gameplay
+&3Gameplay
 
-You open a cell by selecting it and pressing the enter key, when the cell is opened it will check the 
-number of cells with mines around the cell like so.
+&6You open a cell by selecting it and pressing the enter key, when the cell is opened it will check the 
+&6number of cells with mines around the cell like so.
 
-X is the selected cell.
+&3X &6is the selected cell.
 
- |_||_||_|
- |_||X||_|
- |_||_||_|
+ &6|_||_||_|
+ &6|_||&3X&6||_|
+ &6|_||_||_|
 
-X will be the number of cells around the opened cell are mines Ex.
+&3X &6will be the number of cells around the opened cell are mines Ex.
 
- |_||M||_|
- |_||2||_|
- |M||_||_|
+ &6|_||&2M&6||_|
+ &6|_||&32&6||_|
+ &6|&2M&6||_||_|
 
-If there are no mines around the selected cell no number will be shown and the 4 cells that are connected 
-are opened autometicly as well. If a cell that contains a mine is opened all the mines explode and you 
-lose the game.
+&6If there are no mines around the selected cell no number will be shown and the 4 cells that are connected 
+&6are opened autometicly as well. If a cell that contains a mine is opened all the mines explode and you 
+&6lose the game.
 
-You can flag(Mark) a cell that you think has a mine, this is mostly to help you narrow down where the
-mines are. You can cycle between a F mark or a ? mark, also marked cells can not be opened by the player
-this is so thet you dont open a cell that you think is a mine by mistake :P 
+&6You can flag(Mark) a cell that you think has a mine, this is mostly to help you narrow down where the
+&6mines are. You can cycle between a F mark or a ? mark, also marked cells can not be opened by the player
+&6this is so thet you dont open a cell that you think is a mine by mistake :P 
 
- |?||1|| || || || |
- | ||1||1||1|| || |
- | ||1||F||1|| || |
+ &6|&7?&6||&31&6|| || || || |
+ &6| ||&31&6||&31&6||&31&6|| || |
+ &6| ||&31&6||&4F&6||&31&6|| || |

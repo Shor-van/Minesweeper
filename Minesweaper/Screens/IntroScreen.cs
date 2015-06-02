@@ -58,7 +58,7 @@ namespace Minesweeper.Screens
 
             if (shadowAnim.AnimComplete)
             {
-                System.Threading.Thread.Sleep(250);
+                System.Threading.Thread.Sleep(350);
                 Program.gameState = GameState.MenuState;
                 return;
             }
