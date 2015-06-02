@@ -360,7 +360,8 @@ namespace Minesweeper.GameBoard
             //Open cell
             else if (Keyboard.IsKeyPressed(ConsoleKey.Enter))
             {
-                OpenCell(selX, selY);
+                if(cells[selX, selY].Text != "F" && cells[selX, selY].Text != "?")
+                    OpenCell(selX, selY);
             }
 
             //Mark cell

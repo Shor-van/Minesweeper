@@ -48,7 +48,7 @@
 &6lose the game.
 
 &6You can flag(Mark) a cell that you think has a mine, this is mostly to help you narrow down where the
-&6mines are. You can cycle between a F mark or a ? mark, also marked cells can not be opened by the player
+&6mines are. You can cycle between a &4F&6 mark or a &7?&6 mark, also marked cells can not be opened by the player
 &6this is so thet you dont open a cell that you think is a mine by mistake :P 
 
  &6|&7?&6||&31&6|| || || || |
