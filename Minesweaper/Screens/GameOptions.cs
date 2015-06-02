@@ -47,10 +47,37 @@ namespace Minesweeper.Screens
             arrow = new Arrow(ConsoleColor.Yellow, 0, 0, false);
 
             selection = 0;
+
+            RecculatePositions();
         }
 
-        /// <summary>In the future things that are drawn once like the tile and the labels will bee drawn here</summary>
-        public void SetupScreen()
+        /// <summary>Recalculates all the positions of the UI objects</summary>
+        public void RecculatePositions()
+        {
+            //Recalulate positions
+            options[0].PositionX = (Program.ViewWidth() / 2) - (options[0].MeasureSize()[0] / 2);
+            options[1].PositionX = (Program.ViewWidth() / 2) - (options[1].MeasureSize()[0] / 2);
+            options[2].PositionX = (Program.ViewWidth() / 2) - (options[2].MeasureSize()[0] / 2);
+            options[3].PositionX = (Program.ViewWidth() / 2) - (options[3].MeasureSize()[0] / 2);
+
+            options[0].PositionY = (Program.ViewHieght() / 2) - 3;
+            options[1].PositionY = (Program.ViewHieght() / 2) - 2;
+            options[2].PositionY = (Program.ViewHieght() / 2) - 1;
+            options[3].PositionY = (Program.ViewHieght() / 2);
+
+            //Tile
+            tile.PositionX = (Program.ViewWidth() / 2 - (tile.MeasureSize())[0] / 2);
+            tile.PositionY = 2;
+
+            //labels
+            lblSelect.PositionX = (Program.ViewWidth() / 2) - (lblSelect.MeasureSize()[0] / 2);
+            lblSelect.PositionY = ((tile.PositionY + tile.MeasureSize()[1]) + 3);
+            controls.PositionX = (Program.ViewWidth() / 2) - (controls.MeasureSize()[0] / 2);
+            controls.PositionY = Program.ViewHieght() - 1;
+        }
+
+        /// <summary>Draws objects that should only be drawn when the games switchs to this screen</summary>
+        public void DrawOnce()
         {
 
         }
@@ -90,26 +117,10 @@ namespace Minesweeper.Screens
 
             if (Program.sizeChanged || Program.switchingScreen == true)
             {
-                //Recalulate positions
-                options[0].PositionX = (Program.ViewWidth() / 2) - (options[0].MeasureSize()[0] / 2);
-                options[1].PositionX = (Program.ViewWidth() / 2) - (options[1].MeasureSize()[0] / 2);
-                options[2].PositionX = (Program.ViewWidth() / 2) - (options[2].MeasureSize()[0] / 2);
-                options[3].PositionX = (Program.ViewWidth() / 2) - (options[3].MeasureSize()[0] / 2);
+                Program.backgroundColor = ConsoleColor.Black;
 
-                options[0].PositionY = (Program.ViewHieght() / 2) - 3;
-                options[1].PositionY = (Program.ViewHieght() / 2) - 2;
-                options[2].PositionY = (Program.ViewHieght() / 2) - 1;
-                options[3].PositionY = (Program.ViewHieght() / 2);
-
-                //Tile
-                tile.PositionX = (Program.ViewWidth() / 2 - (tile.MeasureSize())[0] / 2);
-                tile.PositionY = 2;
-
-                //labels
-                lblSelect.PositionX = (Program.ViewWidth() / 2) - (lblSelect.MeasureSize()[0] / 2);
-                lblSelect.PositionY = ((tile.PositionY + tile.MeasureSize()[1]) + 3);
-                controls.PositionX = (Program.ViewWidth() / 2) - (controls.MeasureSize()[0] / 2);
-                controls.PositionY = Program.ViewHieght() - 1;
+                RecculatePositions();
+                DrawOnce();
             }
 
             Program.switchingScreen = false;

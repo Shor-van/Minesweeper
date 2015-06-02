@@ -84,7 +84,7 @@ namespace Minesweeper.Screens.UI
         }
 
         /// <summary>Draws items that are drawn once</summary>
-        public void OneTimeDraw()
+        public void DrawOnce()
         {
             //Draw base background
             for (int i = posX; i < width + posX; i++)

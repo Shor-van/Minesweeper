@@ -277,6 +277,7 @@ namespace Minesweeper
             }
             else
             {
+                Console.BackgroundColor = Program.backgroundColor;
                 Console.Clear();
             }
         }

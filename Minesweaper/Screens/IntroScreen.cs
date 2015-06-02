@@ -18,7 +18,7 @@ namespace Minesweeper.Screens
         {
             shadow = new TitleText("SHADOW GAMES", ConsoleColor.Black, 0, 0);
             shorvan = new TitleText("SHOR VAN", ConsoleColor.White, 0, 0);
-            shadowAnim = new LogoAnimation(0,0,12);
+            shadowAnim = new LogoAnimation(0, 0, 20);
 
             RecalcualtePositions();
         }
@@ -34,7 +34,7 @@ namespace Minesweeper.Screens
         }
 
         /// <summary>Draws objects that should only be drawn when the games switchs to this screen</summary>
-        public void OneTimeDraw()
+        public void DrawOnce()
         {
             shadow.Draw();
             shorvan.Draw();
@@ -45,15 +45,23 @@ namespace Minesweeper.Screens
         {
             if (Program.switchingScreen)
             {
-                RecalcualtePositions();
                 Program.backgroundColor = ConsoleColor.DarkCyan;
                 Console.BackgroundColor = Program.backgroundColor;
                 Console.Clear();
-                OneTimeDraw();
+
+                RecalcualtePositions();
+                DrawOnce();
             }
 
             Program.switchingScreen = false;
             shadowAnim.Update();
+
+            if (shadowAnim.AnimComplete)
+            {
+                System.Threading.Thread.Sleep(250);
+                Program.gameState = GameState.MenuState;
+                return;
+            }
         }
 
         /// <summary>Draws the screen, is called every loop</summary>

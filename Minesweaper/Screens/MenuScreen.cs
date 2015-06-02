@@ -46,10 +46,43 @@ namespace Minesweeper.Screens
             selectionArrow = new Arrow(ConsoleColor.Yellow, 0, 0, false);
 
             selection = 0;
+
+            RecalculatePositions();
         }
 
-        /// <summary>In the future things that are drawn once like the tile and the labels will bee drawn here</summary>
-        public void SetupScreen()
+        /// <summary>Recalculates all the positions of the UI objects</summary>
+        public void RecalculatePositions()
+        {
+            //Recalulate positions
+            options[0].PositionX = (Program.ViewWidth() / 2) - (options[0].MeasureSize()[0] / 2);
+            options[1].PositionX = (Program.ViewWidth() / 2) - (options[1].MeasureSize()[0] / 2);
+            options[2].PositionX = (Program.ViewWidth() / 2) - (options[2].MeasureSize()[0] / 2);
+
+            options[0].PositionY = (Program.ViewHieght() / 2) - 3;
+            options[1].PositionY = (Program.ViewHieght() / 2) - 2;
+            options[2].PositionY = (Program.ViewHieght() / 2) - 1;
+
+            //Tile
+            tile.PositionX = (Program.ViewWidth() / 2 - (tile.MeasureSize())[0] / 2);
+            tile.PositionY = 2;
+
+            //Splash
+            splashText.PositionX = Program.ViewWidth() / 2;
+            splashText.PositionY = tile.PositionY + (tile.MeasureSize()[1]);
+
+            //Labels
+            version.PositionX = 1;
+            version.PositionY = Program.ViewHieght() - 1;
+
+            controls.PositionX = (Program.ViewWidth() / 2) - (controls.MeasureSize()[0] / 2);
+            controls.PositionY = Program.ViewHieght() - 1;
+
+            shorvan.PositionX = ((Program.ViewWidth() - 1) - shorvan.MeasureSize()[0]);
+            shorvan.PositionY = Program.ViewHieght() - 1;
+        }
+
+        /// <summary>Draws objects that should only be drawn when the games switchs to this screen</summary>
+        public void DrawOnce()
         {
 
         }
@@ -81,37 +114,17 @@ namespace Minesweeper.Screens
                 splashText.GenerateNewSplashText();
             }
 
-            Program.switchingScreen = false;
-
-            if (Program.sizeChanged)
+            if (Program.sizeChanged || Program.switchingScreen)
             {
-                //Recalulate positions
-                options[0].PositionX = (Program.ViewWidth() / 2) - (options[0].MeasureSize()[0] / 2);
-                options[1].PositionX = (Program.ViewWidth() / 2) - (options[1].MeasureSize()[0] / 2);
-                options[2].PositionX = (Program.ViewWidth() / 2) - (options[2].MeasureSize()[0] / 2);
+                Program.backgroundColor = ConsoleColor.Black;
+                Console.BackgroundColor = Program.backgroundColor;
+                Console.Clear();
 
-                options[0].PositionY = (Program.ViewHieght() / 2) -  3;
-                options[1].PositionY = (Program.ViewHieght() / 2) - 2;
-                options[2].PositionY = (Program.ViewHieght() / 2) - 1;
-
-                //Tile
-                tile.PositionX = (Program.ViewWidth() / 2 - (tile.MeasureSize())[0] / 2);
-                tile.PositionY = 2;
-
-                //Splash
-                splashText.PositionX = Program.ViewWidth() / 2;
-                splashText.PositionY = tile.PositionY + (tile.MeasureSize()[1]);
-
-                //Labels
-                version.PositionX = 1;
-                version.PositionY = Program.ViewHieght() - 1;
-
-                controls.PositionX = (Program.ViewWidth() / 2) - (controls.MeasureSize()[0] / 2);
-                controls.PositionY = Program.ViewHieght() - 1;
-
-                shorvan.PositionX = ((Program.ViewWidth()-1) - shorvan.MeasureSize()[0]);
-                shorvan.PositionY = Program.ViewHieght() - 1;
+                RecalculatePositions();
+                DrawOnce();
             }
+
+            Program.switchingScreen = false;
 
             splashText.Update();
 

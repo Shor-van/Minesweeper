@@ -62,59 +62,62 @@ namespace Minesweeper.Screens.UI
         /// <param name="top"></param>
         public void RanderLogoAnim(int top)
         {
-            if (animStage == 1)
+            if (animComplete == false)
             {
-                for (int i = 0; i < 4; i++)
+                if (animStage == 1)//The start of the animation the lines of the shadow logo
                 {
+                    for (int i = 0; i < 4; i++)
+                    {
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        Console.SetCursorPosition(0 + currentFrame, top + i);
+                        Console.Write("█");
+                        Console.BackgroundColor = ConsoleColor.White;
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.SetCursorPosition(99 - currentFrame, top + 8 + i);
+                        Console.Write("█");
+                        Console.BackgroundColor = Program.backgroundColor;
+                    }
+                }
+                if (animStage == 2)//Moving the lines close to the center
+                {
+                    System.Threading.Thread.Sleep((int)timeBetweenFrames); //This needs to sleep the same time between frames?????
+                    Console.MoveBufferArea(0 + (currentFrame - 35), top, 36, 4, (currentFrame - 35) + 1, top);
+                    Console.MoveBufferArea(64 - (currentFrame - 35), top + 8, 36, 4, (64 - (currentFrame - 35)) - 1, top + 8);
+                }
+                if (animStage == 3)//Turns the lines into each other
+                {
+                    Console.BackgroundColor = Program.backgroundColor;
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.SetCursorPosition(26 + (currentFrame - 61), top);
+                    Console.Write(" ");
+                    Console.SetCursorPosition(26 + (currentFrame - 61), top + 1);
+                    Console.Write(" ");
+                    Console.SetCursorPosition(26 + (currentFrame - 61), top + 2);
+                    Console.Write(" ");
+                    Console.SetCursorPosition(26 + (currentFrame - 61), top + 3);
+                    Console.Write(" ");
                     Console.BackgroundColor = ConsoleColor.Black;
                     Console.ForegroundColor = ConsoleColor.Black;
-                    Console.SetCursorPosition(0 + currentFrame, top + i);
-                    Console.Write("█");
+                    Console.SetCursorPosition(54, top + 4 + (currentFrame - 61));
+                    Console.Write("████████");
+                    Console.BackgroundColor = Program.backgroundColor;
+                    Console.ForegroundColor = Program.backgroundColor;
+                    Console.SetCursorPosition(73 - (currentFrame - 61), top + 8);
+                    Console.Write(" ");
+                    Console.SetCursorPosition(73 - (currentFrame - 61), top + 8 + 1);
+                    Console.Write(" ");
+                    Console.SetCursorPosition(73 - (currentFrame - 61), top + 8 + 2);
+                    Console.Write(" ");
+                    Console.SetCursorPosition(73 - (currentFrame - 61), top + 8 + 3);
+                    Console.Write(" ");
                     Console.BackgroundColor = ConsoleColor.White;
                     Console.ForegroundColor = ConsoleColor.White;
-                    Console.SetCursorPosition(99 - currentFrame, top + 8 + i);
-                    Console.Write("█");
-                    Console.BackgroundColor = Program.backgroundColor;
+                    Console.SetCursorPosition(38, top + 7 - (currentFrame - 61));
+                    Console.Write("████████");
                 }
-            }
-            if (animStage == 2)
-            {                
-                System.Threading.Thread.Sleep((int)timeBetweenFrames); //This needs to sleep the same time between frames?????
-                Console.MoveBufferArea(0 + (currentFrame - 35), top, 36, 4, (currentFrame - 35) + 1, top);
-                Console.MoveBufferArea(64 - (currentFrame - 35), top + 8, 36, 4, (64 - (currentFrame - 35)) - 1, top + 8);
-            }
-            if (animStage == 3)
-            {
                 Console.BackgroundColor = Program.backgroundColor;
-                Console.ForegroundColor = ConsoleColor.Blue;
-                Console.SetCursorPosition(26 + (currentFrame - 61), top);
-                Console.Write(" ");
-                Console.SetCursorPosition(26 + (currentFrame - 61), top + 1);
-                Console.Write(" ");
-                Console.SetCursorPosition(26 + (currentFrame - 61), top + 2);
-                Console.Write(" ");
-                Console.SetCursorPosition(26 + (currentFrame - 61), top + 3);
-                Console.Write(" ");
-                Console.BackgroundColor = ConsoleColor.Black;
-                Console.ForegroundColor = ConsoleColor.Black;
-                Console.SetCursorPosition(54, top + 4 + (currentFrame - 61));
-                Console.Write("████████");
-                Console.BackgroundColor = Program.backgroundColor;
-                Console.ForegroundColor = Program.backgroundColor;
-                Console.SetCursorPosition(73 - (currentFrame - 61), top + 8);
-                Console.Write(" ");
-                Console.SetCursorPosition(73 - (currentFrame - 61), top + 8 + 1);
-                Console.Write(" ");
-                Console.SetCursorPosition(73 - (currentFrame - 61), top + 8 + 2);
-                Console.Write(" ");
-                Console.SetCursorPosition(73 - (currentFrame - 61), top + 8 + 3);
-                Console.Write(" ");
-                Console.BackgroundColor = ConsoleColor.White;
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.SetCursorPosition(38, top + 7 - (currentFrame - 61));
-                Console.Write("████████");
             }
-            Console.BackgroundColor = Program.backgroundColor;
         }
     }
 }

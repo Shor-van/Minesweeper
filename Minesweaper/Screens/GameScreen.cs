@@ -50,6 +50,14 @@ namespace Minesweeper.Screens
             lblcont.PositionY = (Program.ViewHieght() - 1);
         }
 
+        /// <summary>Draws objects that should only be drawn when the games switchs to this screen</summary>
+        public void DrawOnce()
+        {
+            panel.DrawOnce();
+            gameBoard.Draw();
+            lblcont.Draw();
+        }
+
         /// <summary>Checks if the game board has been setup</summary>
         /// <returns>false if the board is not setup else true</returns>
         private bool IsBoardSetup()
@@ -85,9 +93,7 @@ namespace Minesweeper.Screens
             if (Program.switchingScreen)
             {
                 RecalculatePostions();
-                panel.OneTimeDraw();
-                gameBoard.Draw();
-                lblcont.Draw();
+                DrawOnce();
             }
 
             Program.switchingScreen = false;
