@@ -295,7 +295,7 @@ namespace Minesweeper
         {
             return false;
         }
-
+         
         /// <summary>Adds a new high score to the list of highscores</summary>
         /// <param name="playerName">The name that the playe entered</param>
         /// <param name="minutes">The amount of minutes that the player took</param>

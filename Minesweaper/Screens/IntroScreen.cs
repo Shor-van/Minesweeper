@@ -19,7 +19,7 @@ namespace Minesweeper.Screens
         {
             shadow = new TitleText("SHADOW GAMES", ConsoleColor.Black, 0, 0);
             shorvan = new TitleText("SHOR VAN", ConsoleColor.White, 0, 0);
-            shadowAnim = new LogoAnimation(0, 13, 20);
+            shadowAnim = new LogoAnimation(3, 13, 20);
 
             RecalcualtePositions();
         }
