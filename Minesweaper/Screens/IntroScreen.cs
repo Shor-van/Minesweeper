@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using Minesweeper.Screens.UI;
+using Minesweeper.Utils;
 
 namespace Minesweeper.Screens
 {
@@ -18,7 +19,7 @@ namespace Minesweeper.Screens
         {
             shadow = new TitleText("SHADOW GAMES", ConsoleColor.Black, 0, 0);
             shorvan = new TitleText("SHOR VAN", ConsoleColor.White, 0, 0);
-            shadowAnim = new LogoAnimation(0, 0, 20);
+            shadowAnim = new LogoAnimation(0, 13, 20);
 
             RecalcualtePositions();
         }
@@ -59,6 +60,13 @@ namespace Minesweeper.Screens
             if (shadowAnim.AnimComplete)
             {
                 System.Threading.Thread.Sleep(350);
+                //Program.gameState = GameState.MenuState;
+                //return;
+            }
+
+            //skip
+            if (Keyboard.IsKeyPressed(ConsoleKey.Spacebar) || Keyboard.IsKeyPressed(ConsoleKey.Escape) || Keyboard.IsKeyPressed(ConsoleKey.Enter))
+            {
                 Program.gameState = GameState.MenuState;
                 return;
             }
@@ -67,7 +75,7 @@ namespace Minesweeper.Screens
         /// <summary>Draws the screen, is called every loop</summary>
         public void Draw()
         {
-            shadowAnim.RanderLogoAnim(13);
+            shadowAnim.RanderLogoAnim();
         }
     }
 }

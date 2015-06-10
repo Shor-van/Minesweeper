@@ -10,8 +10,8 @@ namespace Minesweeper.Screens.UI
         private float timeBetweenFrames; //The amount of time that needs to pass between frames
         private int currentFrame; //The current frame
         private int animStage; //The Stage of the animations
-        private int centerleft; //The left center of the animation
-        private int centerTop; //The top center of the animation
+        private int left; //The left of the whole  animation
+        private int top; //The top  of the whole animation
         private bool animComplete; //Weather the animation is complete
         private float elepsedTime; //The time that has elepsed
 
@@ -19,13 +19,13 @@ namespace Minesweeper.Screens.UI
         public bool AnimComplete { get { return animComplete; } }
 
         /// <summary>Base constructor, Creates a new logo animation object that will draw the intro animation</summary>
-        /// <param name="centerLeft">The left center of the animation</param>
-        /// <param name="centerTop">The top center of the animation</param>
+        /// <param name="left">The left most of the animation</param>
+        /// <param name="top">The top most of the animation</param>
         /// <param name="timeBetweenFrames">The time to wait between frames, in ms</param>
-        public LogoAnimation(int centerLeft, int centerTop, float timeBetweenFrames)
+        public LogoAnimation(int left, int top, float timeBetweenFrames)
         {
-            this.centerleft = centerleft;
-            this.centerTop = centerTop;
+            this.left = left;
+            this.top = top;
             this.timeBetweenFrames = timeBetweenFrames;
         }
 
@@ -60,7 +60,7 @@ namespace Minesweeper.Screens.UI
 
         /// <summary>Anim Test</summary>
         /// <param name="top"></param>
-        public void RanderLogoAnim(int top)
+        public void RanderLogoAnim()
         {
             if (animComplete == false)
             {
@@ -81,7 +81,7 @@ namespace Minesweeper.Screens.UI
                 }
                 if (animStage == 2)//Moving the lines close to the center
                 {
-                    System.Threading.Thread.Sleep((int)timeBetweenFrames); //This needs to sleep the same time between frames?????
+                    System.Threading.Thread.Sleep((int)timeBetweenFrames); //This needs to sleep the same time between frames????? or else it breaks try to fix
                     Console.MoveBufferArea(0 + (currentFrame - 35), top, 36, 4, (currentFrame - 35) + 1, top);
                     Console.MoveBufferArea(64 - (currentFrame - 35), top + 8, 36, 4, (64 - (currentFrame - 35)) - 1, top + 8);
                 }

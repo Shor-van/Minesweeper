@@ -84,6 +84,7 @@
     <Compile Include="Sound\SoundThread.cs" />
     <Compile Include="Utils\CrashReporter.cs" />
     <Compile Include="Utils\DebugUtil.cs" />
+    <Compile Include="Utils\Highscore.cs" />
     <Compile Include="Utils\Keyboard.cs" />
     <Compile Include="Screens\UI\MenuText.cs" />
     <Compile Include="Program.cs" />
