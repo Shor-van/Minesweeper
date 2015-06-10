@@ -46,6 +46,7 @@ namespace Minesweeper
         private static GameScreen gameScreen;
         private static GameOverScreen gameOverScreen;
         private static HelpScreen helpScreen;
+        private static HighscoreScreen highscoreScreen;
 
         private static int viewWidth = 105, viewHeight = 40; //The width and height of the game window
 
@@ -65,6 +66,7 @@ namespace Minesweeper
             gameScreen = new GameScreen();
             gameOverScreen = new GameOverScreen();
             helpScreen = new HelpScreen();
+            highscoreScreen = new HighscoreScreen();
         }
 
         /// <summary>Changes the size of the window sisze</summary>
@@ -188,7 +190,10 @@ namespace Minesweeper
             }
             else if (gameState == GameState.ScoreState)
             {
+                highscoreScreen.Update();
 
+                if (gameState != GameState.ScoreState)
+                    switchingScreen = true;
             }
 
             //Debug Update
@@ -253,7 +258,7 @@ namespace Minesweeper
                 }
                 else if (gameState == GameState.ScoreState)
                 {
-
+                    highscoreScreen.Draw();
                 }
 
                 if (showDebug)
@@ -280,6 +285,24 @@ namespace Minesweeper
                 Console.BackgroundColor = Program.backgroundColor;
                 Console.Clear();
             }
+        }
+
+        /// <summary>Checks if the time that the player got is a better highscore</summary>
+        /// <param name="minutes">The amount of minutes that the player took</param>
+        /// <param name="seconds">The amount of seconds that the player took</param>
+        /// <returns>True if the time is a new better time</returns>
+        public static bool IsNewHighscore(int minutes, int seconds)
+        {
+            return false;
+        }
+
+        /// <summary>Adds a new high score to the list of highscores</summary>
+        /// <param name="playerName">The name that the playe entered</param>
+        /// <param name="minutes">The amount of minutes that the player took</param>
+        /// <param name="seconds">The amount of seconds that the player took</param>
+        public static void AddNewHighScore(string playerName, int minutes, int seconds)
+        {
+            highscoreScreen.AddNewHighSore(playerName, minutes, seconds);
         }
 
         /// <summary>Sets up a new game</summary>
