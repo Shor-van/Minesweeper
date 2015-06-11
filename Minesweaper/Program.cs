@@ -54,7 +54,7 @@ namespace Minesweeper
         private static void Initalize()
         {
             Console.SetWindowSize(viewWidth, viewHeight);
-            Console.Title = "Minesweeper V0.87";
+            Console.Title = "Minesweeper V0.92";
             Console.CursorVisible = false;
             Console.BufferWidth = viewWidth;
             Console.BufferHeight = viewHeight;

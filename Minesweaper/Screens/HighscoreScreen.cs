@@ -3,17 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Minesweeper.Utils;
+using Minesweeper.Screens.UI;
 
 namespace Minesweeper.Screens
 {
     public class HighscoreScreen
     {
         private Highscore[] highscores; //The array of the highscores
+        private MultiColoredTextLabel[] lblHighscores; //A array of multicolored text label used to show the highscores
+        private TitleText title; //The title text "HIGHSCORES"
+        private TextLabel lblCont; //TextLabel saying to press any key to cloes the game
 
         /// <summary>Base constructors</summary>
         public HighscoreScreen()
         {
             highscores = new Highscore[10];
+            lblHighscores = new MultiColoredTextLabel[10];
         }
 
         /// <summary>Recalulates the positions of the UI objects </summary>
@@ -22,7 +27,7 @@ namespace Minesweeper.Screens
 
         }
 
-        /// <summary>Sets up the screen, builds the highscore list for the array of high scores</summary>
+        /// <summary>Sets up the screen, builds the highscore list form the array of high scores</summary>
         public void SetupScreen()
         {
 
@@ -46,6 +51,18 @@ namespace Minesweeper.Screens
 
             //Order
             Highscore.OrderHighScores(highscores);
+        }
+
+        /// <summary>Loads highscore data from file if found</summary>
+        public void LoadHighscores()
+        {
+
+        }
+
+        /// <summary>Saves highscore data to file</summary>
+        public void SaveHighscores()
+        {
+
         }
 
         /// <summary> Draws UI objects that are only met to be drawn once, called only when switchingscreens is true</summary>
