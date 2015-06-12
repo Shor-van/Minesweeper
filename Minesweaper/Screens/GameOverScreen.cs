@@ -38,6 +38,9 @@ namespace Minesweeper.Screens
             else if (secs > 0)
                 strSec = secs.ToString();
 
+            //Test
+            Program.AddNewHighScore("Fake Highscore Testing screen", mins, secs);
+
             time = new TextLabel("Your time was:" + strMin + ":" + strSec, 0, 0, ConsoleColor.Yellow);
 
             if (Program.gameWon == true)

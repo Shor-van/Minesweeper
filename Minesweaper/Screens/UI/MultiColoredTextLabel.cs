@@ -50,7 +50,9 @@ namespace Minesweeper.Screens.UI
             else if (code == "&6")
                 return ConsoleColor.Cyan;
             else if (code == "&7")
-                return ConsoleColor.Magenta;        
+                return ConsoleColor.Magenta;
+            else if (code == "&8")
+                return ConsoleColor.Gray;
             return null;
         }
 

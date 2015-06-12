@@ -75,7 +75,7 @@ namespace Minesweeper.Screens
         /// <summary>Draws the screen, is called every loop</summary>
         public void Draw()
         {
-            shadowAnim.RanderLogoAnim();
+            shadowAnim.Draw();
         }
     }
 }

@@ -55,13 +55,6 @@ namespace Minesweeper.Screens.UI
         /// <summary>Draws the current frame of the animation</summary>
         public void Draw()
         {
-
-        }
-
-        /// <summary>Anim Test</summary>
-        /// <param name="top"></param>
-        public void RanderLogoAnim()
-        {
             if (animComplete == false)
             {
                 if (animStage == 1)//The start of the animation the lines of the shadow logo

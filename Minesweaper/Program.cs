@@ -302,7 +302,7 @@ namespace Minesweeper
         /// <param name="seconds">The amount of seconds that the player took</param>
         public static void AddNewHighScore(string playerName, int minutes, int seconds)
         {
-            highscoreScreen.AddNewHighSore(playerName, minutes, seconds);
+            highscoreScreen.AddNewHighScore(playerName, minutes, seconds);
         }
 
         /// <summary>Sets up a new game</summary>

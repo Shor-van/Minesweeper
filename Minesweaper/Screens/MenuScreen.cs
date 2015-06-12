@@ -102,7 +102,8 @@ namespace Minesweeper.Screens
 
         private void OnQuitSelected(object sender, EventArgs e)
         {
-            Program.isExiting = true;
+            Program.gameState = GameState.ScoreState;
+            return;
         }
 
         /// <summary>Updates the menu, updates currently selected opytion</summary>
