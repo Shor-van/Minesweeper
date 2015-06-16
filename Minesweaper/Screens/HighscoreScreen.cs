@@ -20,13 +20,34 @@ namespace Minesweeper.Screens
             highscores = new Highscore[10];
             lblHighscores = new MultiColoredTextLabel[10];
 
+            title = new TitleText("HIGHSCORES", ConsoleColor.Red, 0, 0);
+            lblCont = new TextLabel("Press any key to close the game.", 0, 0, ConsoleColor.Cyan);
+
             RecalculatePositions();
         }
 
         /// <summary>Recalulates the positions of the UI objects </summary>
         public void RecalculatePositions()
         {
- 
+            //Title
+            title.PositionX = (Program.ViewWidth() / 2) - (title.MeasureSize()[0] / 2);
+            title.PositionY = 2;
+
+            //Labels
+            lblCont.PositionX = (Program.ViewWidth() / 2) - (lblCont.MeasureSize()[0] / 2);
+            lblCont.PositionY = (Program.ViewHieght() - 3);
+
+            //Highscore List
+            for (int i = 0; i < lblHighscores.Length; i++)
+            {
+                if (lblHighscores[i] != null)
+                {
+                    lblHighscores[i].PositionX = 3;
+                    lblHighscores[i].PositionY = (title.PositionY + (title.MeasureSize()[1])) + 2;
+                }
+                else
+                    break;
+            }
         }
 
         /// <summary>Sets up the screen, builds the highscore list form the array of high scores</summary>
@@ -95,6 +116,9 @@ namespace Minesweeper.Screens
         /// <summary> Draws UI objects that are only met to be drawn once, called only when switchingscreens is true</summary>
         public void DrawOnce()
         {
+            title.Draw();
+            lblCont.Draw();
+
             for (int i = 0; i < lblHighscores.Length; i++)
             {
                 if (lblHighscores[i] != null)
