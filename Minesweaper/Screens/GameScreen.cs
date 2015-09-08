@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Minesweeper.GameBoard;
 using Minesweeper.Screens.UI;
+using Minesweeper.Utils;
 
 namespace Minesweeper.Screens
 {
@@ -109,6 +110,7 @@ namespace Minesweeper.Screens
                 Program.gameWon = false;
                 Program.gameState = GameState.GameOverState;
                 Program.SetupGameOverScreen(minute, second);
+                Keyboard.IgnoreInputFor(2000);
                 System.Threading.Thread.Sleep(gameOverWaitTime);
                 return;
             }
@@ -121,6 +123,7 @@ namespace Minesweeper.Screens
                 Program.gameWon = true;
                 Program.gameState = GameState.GameOverState;
                 Program.SetupGameOverScreen(minute, second);
+                Keyboard.IgnoreInputFor(2000);
                 System.Threading.Thread.Sleep(gameOverWaitTime);
                 return;
             }

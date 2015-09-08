@@ -139,7 +139,7 @@ namespace Minesweeper
         {
 
             //Check keyboard inputs
-            if (Console.KeyAvailable == true)
+            if (Console.KeyAvailable == true || Keyboard.GetIgnoreInput())
             {
                 //Update the keyboard input manage
                 Keyboard.Update();

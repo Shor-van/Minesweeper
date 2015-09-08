@@ -3,3 +3,8 @@ C:\Users\Espedito\Documents\Visual Studio 2010\Projects\Games\Console(Texted Bas
 C:\Users\Espedito\Documents\Visual Studio 2010\Projects\Games\Console(Texted Based)\Minesweaper\Minesweaper\bin\Debug\Minesweeper.pdb
 C:\Users\Espedito\Documents\Visual Studio 2010\Projects\Games\Console(Texted Based)\Minesweaper\Minesweaper\obj\x86\Debug\Minesweeper.exe
 C:\Users\Espedito\Documents\Visual Studio 2010\Projects\Games\Console(Texted Based)\Minesweaper\Minesweaper\obj\x86\Debug\Minesweeper.pdb
+C:\Users\Shor_van\Documents\Visual Studio 2010\Projects\Games\Console(Texted Based)\Minesweaper\Minesweaper\obj\x86\Debug\Minesweeper.exe
+C:\Users\Shor_van\Documents\Visual Studio 2010\Projects\Games\Console(Texted Based)\Minesweaper\Minesweaper\obj\x86\Debug\Minesweeper.pdb
+C:\Users\Shor_van\Documents\Visual Studio 2010\Projects\Games\Console(Texted Based)\Minesweaper\Minesweaper\bin\Debug\Minesweeper.exe
+C:\Users\Shor_van\Documents\Visual Studio 2010\Projects\Games\Console(Texted Based)\Minesweaper\Minesweaper\bin\Debug\Minesweeper.pdb
+C:\Users\Shor_van\Documents\Visual Studio 2010\Projects\Games\Console(Texted Based)\Minesweaper\Minesweaper\obj\x86\Debug\Minesweeper.csprojResolveAssemblyReference.cache
